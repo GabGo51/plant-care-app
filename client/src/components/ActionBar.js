@@ -8,8 +8,8 @@ const ActionBar = () => {
   
   return (
     <Container>
-      <button onClick={()=>navigate("/")}>PLANT</button>
-      <button onClick={()=>navigate("/user")}>PROFILE</button>
+      <button onClick={()=>navigate("/")}><i className="fa-solid fa-seedling"></i></button>
+      <button onClick={()=>navigate("/user")}><i className="fa-solid fa-user"></i></button>
     </Container>
   )
 }
@@ -20,6 +20,22 @@ display: flex;
 justify-content: space-between;
 position: fixed;
 width: 80vw;
-bottom: 0;
+bottom: 20px;
+
+button{
+  background-color: white;
+  padding: 20px;
+  border: none;
+  border-radius: 50%;
+  transition: 300ms;
+  i{
+    scale: 1.5;
+  }
+
+  &:hover{
+    background-color: black;
+    color: white;
+  }
+}
 `
 export default ActionBar

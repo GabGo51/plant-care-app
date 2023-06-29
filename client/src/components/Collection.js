@@ -31,6 +31,16 @@ border-radius: 50%;
 font-size: 2em;
 position: fixed;
 bottom: 50px;
+background-color: black;
+color: white;
+font-weight: bold;
+border: 2px solid black;
+transition: 300ms;
+&:hover{
+  background-color: white;
+  color: black;
+  border: none;
+}
 }
 `
 

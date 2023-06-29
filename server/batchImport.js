@@ -6,7 +6,7 @@ const uri = process.env.MONGO_URI;
 const dbName = "Plant-Care";
 const collectionName = "All-Plants";
 
-
+//putting the API first 100 page into a result array (3k plants)
 const batchImport = async () => {
   const results = [];
   
@@ -26,8 +26,8 @@ const batchImport = async () => {
   return results;
 };
 
-// batchImport().then((results) => console.log(results));
 
+//pushing that big array into mongo (yoink the data)
 const insertData = async () => {
   const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
