@@ -23,6 +23,12 @@ express()
   .use(express.urlencoded({ extended: false }))
   .use("/", express.static(__dirname + "/"))
 
-  // REST endpoints?.
+  // END POINT.
+
+  app.get("*", (request, response) => {
+    return response
+    .status(404)
+    .json({ status: 404, message: "No endpoint found." });
+  })
 
   .listen(PORT, () => console.info(`Listening on port ${PORT}`));
