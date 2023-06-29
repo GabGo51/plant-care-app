@@ -5,6 +5,8 @@ const morgan = require("morgan");
 
 const PORT = 5100
 
+const { getPlants } = require("./handlers/getPlants");
+
 express()
   .use(function (req, res, next) {
     res.header(
@@ -25,7 +27,11 @@ express()
 
   // END POINT.
 
-  app.get("*", (request, response) => {
+  //get all the plants 
+  .get("/api/get-plants", getPlants)
+
+
+  .get("*", (request, response) => {
     return response
     .status(404)
     .json({ status: 404, message: "No endpoint found." });

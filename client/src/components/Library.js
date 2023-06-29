@@ -1,11 +1,22 @@
 import React from 'react'
 import { styled } from 'styled-components'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 const Library = () => {
-  useEffect(()=>{
+  const [allPlants, setAllPlants] = useState([]);
+  useEffect(() => {
 
+    
+    fetch(`/api/get-plants`)
+      .then((response) => response.json())
+      .then((parse) => {
+        setAllPlants(parse.plants);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
-  }, [])
+  console.log(allPlants);
 
   return (
     <Box>
