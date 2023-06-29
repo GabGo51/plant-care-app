@@ -18,7 +18,7 @@ const ActionBar = () => {
 const Container = styled.div`
 display: flex;
 justify-content: space-between;
-position: absolute;
+position: fixed;
 width: 80vw;
 bottom: 0;
 `

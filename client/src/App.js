@@ -4,6 +4,7 @@ import React from "react";
 import ActionBar from "./components/ActionBar";
 import Collection from "./components/Collection"
 import Profile from "./components/Profile";
+import Library from "./components/Library";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Collection/>}/>
         <Route path="/user" element={<Profile/>}/>
+        <Route path="/library" element={<Library/>}/>
       </Routes>
       </Container>
     </Router>
