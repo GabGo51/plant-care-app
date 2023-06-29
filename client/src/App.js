@@ -5,6 +5,7 @@ import ActionBar from "./components/ActionBar";
 import Collection from "./components/Collection"
 import Profile from "./components/Profile";
 import Library from "./components/Library";
+import PlantDetails from "./components/PlantDetails";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/" element={<Collection/>}/>
         <Route path="/user" element={<Profile/>}/>
         <Route path="/library" element={<Library/>}/>
+        <Route path="/:plantId" element = {<PlantDetails/>}/>
       </Routes>
       </Container>
     </Router>
