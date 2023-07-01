@@ -3,9 +3,10 @@
 const express = require("express");
 const morgan = require("morgan");
 
-const PORT = 5100
+const PORT = 5100;
 
 const { getPlants } = require("./handlers/getPlants");
+const {getPlant} =  require("./handlers/getPlant")
 
 express()
   .use(function (req, res, next) {
@@ -27,17 +28,16 @@ express()
 
   // END POINT.
 
-  //get all the plants 
+  //get all the plants
   .get("/api/get-plants", getPlants)
 
   //get a specific plant
   .get("/api/plant/:plantId", getPlant)
 
-
   .get("*", (request, response) => {
     return response
-    .status(404)
-    .json({ status: 404, message: "No endpoint found." });
+      .status(404)
+      .json({ status: 404, message: "No endpoint found." });
   })
 
   .listen(PORT, () => console.info(`Listening on port ${PORT}`));

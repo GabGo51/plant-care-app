@@ -1,5 +1,4 @@
 const { MongoClient } = require("mongodb");
-
 require("dotenv").config();
 const { MONGO_URI } = process.env;
 const DB_NAME = "Plant-Care";
@@ -8,7 +7,6 @@ const options = {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 };
-("use strict");
 
 /**
  * getItem fetches an item using the itemId set from the request
@@ -16,32 +14,29 @@ const options = {
  * @param request
  * @param response
  */
+
+// Function to retrieve items from the database.
 const getPlant = async (request, response) => {
   const client = new MongoClient(MONGO_URI, options);
-  const plantId = request.params.plantId;
+  const plantId = request.params.itemId
 
   try {
     await client.connect();
     const db = client.db(DB_NAME);
-    console.log("connected!");
+    const plantsCollection = db.collection("All-Plants");
 
-    const plant = await db
-      .collection("All-Plants")
-      .findOne({ _id: Number(plantId) });
-    result
-      ? response
-          .status(200)
-          .json({ status: 200, data: plant, message: "item details" })
-      : response.status(404).json({ status: 404, message: "Not Found" });
+    console.log("Retrieving items...");
+    // Fetch all items from the collection
+    const plant = await plantsCollection.findOne({_id: Number(plantId)})
+
+    // Send the items as a JSON response.
+    response.status(200).json({ status: 200, plant });
   } catch (error) {
-    console.error(error);
-    response.status(500).json({
-      status: 500,
-      message: "Server error",
-    });
+    console.error("An error occurred while retrieving items:", error);
+    response.status(500).json({ status: 500, message: "Internal server error" });
+  } finally {
+    client.close();
   }
-  client.close();
-  console.log("disconnected!");
 };
 
-module.exports = { getPlant };
+module.exports = { getPlant};

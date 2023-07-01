@@ -1,9 +1,11 @@
 import React from 'react'
 import { styled } from 'styled-components'
 import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 const Library = () => {
   const [allPlants, setAllPlants] = useState([]);
   const [value, setValue] = useState("")
+  const navigate = useNavigate()
 
   const matchedPlants = allPlants.filter((plant) => {
     if (value.length < 2) {
@@ -53,9 +55,12 @@ const Library = () => {
           .indexOf(value.toLowerCase());
           const firstHalf = plant.common_name.slice(0, index + value.length);
           const secondHalf = plant.common_name.slice(index + value.length);
-
+          const handleClick = () => {
+            navigate(`/plant/${plant._id}`);
+            setValue("");
+          };
           return (
-            <ListItem key={plant._id} >
+            <ListItem key={plant._id} onClick={handleClick} >
               <span>
                 {firstHalf}
                 <Prediction>{secondHalf}</Prediction>

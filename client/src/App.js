@@ -16,7 +16,7 @@ function App() {
         <Route path="/" element={<Collection/>}/>
         <Route path="/user" element={<Profile/>}/>
         <Route path="/library" element={<Library/>}/>
-        <Route path="/:plantId" element = {<PlantDetails/>}/>
+        <Route path="/plant/:plantId" element = {<PlantDetails/>}/>
       </Routes>
       </Container>
     </Router>
