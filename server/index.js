@@ -30,6 +30,9 @@ express()
   //get all the plants 
   .get("/api/get-plants", getPlants)
 
+  //get a specific plant
+  .get("/api/plant/:plantId", getPlant)
+
 
   .get("*", (request, response) => {
     return response
