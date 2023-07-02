@@ -7,6 +7,7 @@ import Profile from "./components/Profile";
 import Library from "./components/Library";
 import PlantDetails from "./components/PlantDetails";
 import Login from "./components/Login";
+import Signup from "./components/Signup";
 function App() {
   return (
     <Router>
@@ -14,6 +15,7 @@ function App() {
       <ActionBar/>
       <Routes>
         <Route path="/login" element={<Login/>}/>
+        <Route path="/signup" element={<Signup/>}/>
         <Route path="/" element={<Collection/>}/>
         <Route path="/user" element={<Profile/>}/>
         <Route path="/library" element={<Library/>}/>

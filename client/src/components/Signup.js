@@ -1,25 +1,26 @@
 import { styled } from "styled-components"
 import { useNavigate } from "react-router-dom"
-const Login = () => {
+const Signup = () => {
 
     const navigate = useNavigate()
 
     const handleClick = () =>{
 
-        navigate("/signup")
+        navigate("/login")
     }
 
 return(
 
     <Box>
-        <h1>LOGIN</h1>
+        <h1>Sign up</h1>
         <Info>
             <input type="email" placeholder="Email"></input>
             <input type="password" placeholder="Password"></input>
-            <button>Login</button>
+            <input type="password" placeholder="Confirm Password"></input>
+            <button>Sign Up</button>
         </Info>
         
-        <p>First time on Plant-Care? - <span onClick={handleClick}>Create an Account</span></p>
+        <p>Already have an account? - <span onClick={handleClick}>Login</span></p>
 
 
     </Box>
@@ -69,15 +70,13 @@ button{
     border-radius: 30px;
     border: none;
     transition: 200ms;
-    width: 100px;
+    width: 150px;
 
     &:hover{
         background-color: black;
         color: white;
         border: none;
     }
-
-
 }
 `
 
@@ -88,4 +87,4 @@ flex-direction: column;
 align-items: center;
 `
 
-export default Login
+export default Signup
