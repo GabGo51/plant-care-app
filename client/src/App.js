@@ -6,13 +6,14 @@ import Collection from "./components/Collection"
 import Profile from "./components/Profile";
 import Library from "./components/Library";
 import PlantDetails from "./components/PlantDetails";
-
+import Login from "./components/Login";
 function App() {
   return (
     <Router>
       <Container>
       <ActionBar/>
       <Routes>
+        <Route path="/login" element={<Login/>}/>
         <Route path="/" element={<Collection/>}/>
         <Route path="/user" element={<Profile/>}/>
         <Route path="/library" element={<Library/>}/>
