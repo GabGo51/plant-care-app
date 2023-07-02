@@ -13,7 +13,7 @@ const Library = () => {
     }
     return plant.common_name.toLowerCase().includes(value.toLowerCase());
   });
-  const limit = matchedPlants.slice(0, 10);
+  const limit = matchedPlants.slice(0, 9);
   
 
 
@@ -48,6 +48,8 @@ const Library = () => {
           onChange={handleChange}
         />
       </InputBox>
+      <p>Search for<span>your plant :)</span> </p>
+      
       <List>
         {limit.map(plant=>{
           const index = plant.common_name
@@ -82,6 +84,7 @@ flex-direction: column;
 align-items: center;
 padding-bottom: 100px;
 width: 100%;
+position: relative;
 
 input{
   margin-top: 20px;
@@ -92,6 +95,20 @@ input{
   outline: none;
   border: none;
   font-size: 1.4em;
+}
+
+p{
+  position: absolute;
+  top: 200px;
+  display: flex;
+  flex-direction: column;
+  font-size: 2em;
+  opacity: 0.5;
+  color: white;
+
+  span{
+
+  }
 }
 
 `
