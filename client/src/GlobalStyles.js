@@ -17,7 +17,7 @@ export default createGlobalStyle`
 
   html, body {
     max-width: 100vw;
-    background-color: #267A56;
+    background-color:  #F8F8F8 ;
     
   }
 

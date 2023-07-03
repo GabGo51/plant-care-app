@@ -36,6 +36,7 @@ button{
     border: none;
     transition: 200ms;
     width: 150px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 
     &:hover{
         background-color: black;
