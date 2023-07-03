@@ -30,7 +30,7 @@ const Collection = () => {
         if (response.ok) {
           // Update the cartItems state to reflect the deletion
           const updatedCollection = collection.filter(
-            (plant) => plant.id !== plantId
+            (plant) => plant._id !== plantId
           );
           setCollection(updatedCollection);
         } else {
@@ -50,12 +50,12 @@ const Collection = () => {
       {collection.map(plant =>{
         console.log(plant);
         return(
-          <Plant key={plant.id}>
+          <Plant key={plant._id}>
             <p>{plant.name}</p>
             <Main>
               <i className="fa-solid fa-droplet blue"></i>
               <img src={plant.image}/>
-              <i className="fa-regular fa-trash-can red" onClick={() => handleDelete(plant.id)}></i>
+              <i className="fa-regular fa-trash-can red" onClick={() => handleDelete(plant._id)}></i>
             </Main>
             <p>timer</p>
             
@@ -86,7 +86,8 @@ height: 50px;
 border-radius: 50%;
 font-size: 2em;
 position: fixed;
-bottom: 150px;
+top: 10px;
+right: 10px;
 background-color: black;
 color: white;
 font-weight: bold;
@@ -112,7 +113,6 @@ display: flex;
 flex-wrap: wrap;
 align-items: center;
 justify-content: center;
-
 `
 
 const Plant = styled.div`
