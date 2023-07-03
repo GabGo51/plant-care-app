@@ -21,6 +21,7 @@ justify-content: space-between;
 position: fixed;
 width: 80vw;
 bottom: 20px;
+z-index: 100;
 
 button{
   background-color: white;

@@ -64,7 +64,7 @@ height: 50px;
 border-radius: 50%;
 font-size: 2em;
 position: fixed;
-bottom: 50px;
+bottom: 150px;
 background-color: black;
 color: white;
 font-weight: bold;
@@ -107,6 +107,11 @@ align-items: center;
 i{
   margin: 0px 30px;
   scale: 1.5;
+  transition: 200ms;
+
+  &:hover{
+    scale: 1.65;
+  }
 }
 
 .blue{
