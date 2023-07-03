@@ -78,10 +78,14 @@ p{
 
 const InfoBox = styled.div`
 display: flex;
+flex-direction: column;
 
 div{
   border-radius: 40px;
-  margin: 20px;
+  margin: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 `
 

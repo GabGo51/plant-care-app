@@ -49,10 +49,11 @@ input{
     padding: 10px;
     border-radius: 20px;
     padding-left: 30px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 p{
-    color: white;
+    color: balck;
     position: absolute;
     bottom: 125px;
     span{
@@ -71,6 +72,7 @@ button{
     border: none;
     transition: 200ms;
     width: 150px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 
     &:hover{
         background-color: black;

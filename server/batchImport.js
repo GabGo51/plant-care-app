@@ -4,7 +4,7 @@ require('dotenv').config();
 
 const uri = process.env.MONGO_URI;
 const dbName = "Plant-Care";
-const collectionName = "All-Plants";
+const collectionName = "Indoor-Plants";
 
 //putting the API first 100 page into a result array (3k plants)
 const batchImport = async () => {
@@ -12,7 +12,7 @@ const batchImport = async () => {
   
   //looping over the page number and spreading them to get all the plants as individual objects
   for (let i = 1; i <= 100; i++) {
-    const url = `https://perenual.com/api/species-list?page=${i}&key=sk-xvXf649dc0aaed9ee1433`;
+    const url = `https://perenual.com/api/species-list?page=${i}&key=sk-xvXf649dc0aaed9ee1433&indoor=1`;
     
     try {
       const response = await request(url);

@@ -95,6 +95,7 @@ input{
   outline: none;
   border: none;
   font-size: 1.4em;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 p{
