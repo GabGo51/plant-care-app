@@ -9,15 +9,17 @@ const Collection = () => {
   const navigate = useNavigate()
 
   useEffect(() => {
+    console.log("hello");
     fetch(`/api/collection`)
       .then((response) => response.json())
       .then((parse) => {
         setCollection(parse.data);
+        console.log(parse.data);
       })
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [setCollection]);
 
   
 

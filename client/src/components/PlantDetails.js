@@ -61,13 +61,14 @@ const PlantDetails = () => {
             throw new Error(data.message);
           } else {
             console.log("Added to collection!");
+            navigate("/")
           }
         })
         .catch((error) => {
           console.error(error);
           
         });
-        navigate("/")
+        
   }
   return (
 
