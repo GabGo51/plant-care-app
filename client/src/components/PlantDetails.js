@@ -2,11 +2,12 @@ import React from 'react'
 import { useParams, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-
+import { useNavigate } from 'react-router-dom';
 const PlantDetails = () => {
 
   const params = useParams();
   const [plant, setPlant] = useState(null);
+  const navigate  = useNavigate()
 
     // fetching the product details and the company details
     useEffect(() => {
@@ -66,6 +67,7 @@ const PlantDetails = () => {
           console.error(error);
           
         });
+        navigate("/")
   }
   return (
 
