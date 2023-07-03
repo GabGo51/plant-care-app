@@ -9,6 +9,7 @@ const {getPlants} = require("./handlers/getPlants");
 const {getPlant} =  require("./handlers/getPlant")
 const {addPlant} = require("./handlers/addPlant")
 const {getCollection} = require("./handlers/getCollection")
+const {deletePlantFromCollection} = require("./handlers/deleteFromCollection")
 
 express()
   .use(function (req, res, next) {
@@ -39,6 +40,8 @@ express()
   .post("/api/add-plant", addPlant)
 
   .get("/api/collection", getCollection)
+
+  .delete("/api/delete-plant/:plantId", deletePlantFromCollection)
 
 
 

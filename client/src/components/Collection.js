@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
-import { faDisplay } from '@fortawesome/free-solid-svg-icons'
+
 const Collection = () => {
   const [collection, setCollection] = useState(null)
 
@@ -19,7 +19,28 @@ const Collection = () => {
       });
   }, []);
 
-  console.log(collection);
+  
+
+  const handleDelete = (plantId) => {
+    // Perform delete request to remove a single item from the cart
+    fetch(`/api/delete-plant/${plantId}`, {
+      method: "DELETE",
+    })
+      .then((response) => {
+        if (response.ok) {
+          // Update the cartItems state to reflect the deletion
+          const updatedCollection = collection.filter(
+            (plant) => plant.id !== plantId
+          );
+          setCollection(updatedCollection);
+        } else {
+          throw new Error("Error deleting plant from collection");
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
 
   return (
     <Box>
@@ -27,13 +48,14 @@ const Collection = () => {
       {collection&&
       <Content>
       {collection.map(plant =>{
+        console.log(plant);
         return(
-          <Plant>
+          <Plant key={plant.id}>
             <p>{plant.name}</p>
             <Main>
               <i className="fa-solid fa-droplet blue"></i>
               <img src={plant.image}/>
-              <i className="fa-regular fa-trash-can red"></i>
+              <i className="fa-regular fa-trash-can red" onClick={() => handleDelete(plant.id)}></i>
             </Main>
             <p>timer</p>
             
