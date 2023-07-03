@@ -58,11 +58,11 @@ const Library = () => {
           const firstHalf = plant.common_name.slice(0, index + value.length);
           const secondHalf = plant.common_name.slice(index + value.length);
           const handleClick = () => {
-            navigate(`/plant/${plant._id}`);
+            navigate(`/plant/${plant.id}`);
             setValue("");
           };
           return (
-            <ListItem key={plant._id} onClick={handleClick} >
+            <ListItem key={plant.id} onClick={handleClick} >
               <span>
                 {firstHalf}
                 <Prediction>{secondHalf}</Prediction>

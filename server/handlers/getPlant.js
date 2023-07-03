@@ -18,16 +18,16 @@ const options = {
 // Function to retrieve items from the database.
 const getPlant = async (request, response) => {
   const client = new MongoClient(MONGO_URI, options);
-  const plantId = request.params.itemId
+  const plantId = request.params.plantId
 
   try {
     await client.connect();
     const db = client.db(DB_NAME);
     const plantsCollection = db.collection("All-Plants");
 
-    console.log("Retrieving items...");
+    console.log("Retrieving items...", plantId);
     // Fetch all items from the collection
-    const plant = await plantsCollection.findOne({_id: Number(plantId)})
+    const plant = await plantsCollection.findOne({id:Number(plantId)})
 
     // Send the items as a JSON response.
     response.status(200).json({ status: 200, plant });

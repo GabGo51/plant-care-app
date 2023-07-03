@@ -10,6 +10,7 @@ const collectionName = "All-Plants";
 const batchImport = async () => {
   const results = [];
   
+  //looping over the page number and spreading them to get all the plants as individual objects
   for (let i = 1; i <= 100; i++) {
     const url = `https://perenual.com/api/species-list?page=${i}&key=sk-xvXf649dc0aaed9ee1433`;
     

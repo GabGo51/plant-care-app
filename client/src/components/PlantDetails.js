@@ -17,7 +17,8 @@ const PlantDetails = () => {
             throw new Error("Failed to fetch plant data");
           }
           const plantData = await response.json();
-          setPlant(plantData.data);
+          console.log(plantData);
+          setPlant(plantData.plant);
         } catch (error) {
           console.error(error);
           // Handle error state or display an error message
@@ -30,9 +31,16 @@ const PlantDetails = () => {
     }, [params.plantId]);
 
   console.log(plant);
-  
+  //
   return (
-    <div>PlantDetails</div>
+
+    <>
+    {plant&&
+      <div>{plant.common_name}</div>
+    }
+      
+    </>
+    
   )
 }
 
