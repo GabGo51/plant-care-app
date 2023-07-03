@@ -29,8 +29,14 @@ const Collection = () => {
       {collection.map(plant =>{
         return(
           <Plant>
-          <img src={plant.image}/>
-          <p>{plant.name}</p>
+            <p>{plant.name}</p>
+            <Main>
+              <i className="fa-solid fa-droplet blue"></i>
+              <img src={plant.image}/>
+              <i className="fa-regular fa-trash-can red"></i>
+            </Main>
+            <p>timer</p>
+            
           </Plant>
         )
       })}
@@ -82,6 +88,8 @@ img{
 const Content = styled.section`
 display: flex;
 flex-wrap: wrap;
+align-items: center;
+justify-content: center;
 
 `
 
@@ -90,7 +98,27 @@ display: flex;
 align-items: center;
 justify-content: center;
 flex-direction: column;
-margin: 10px;
+margin: 20px;
 `
+
+const Main = styled.div`
+display: flex;
+align-items: center;
+i{
+  margin: 0px 30px;
+  scale: 1.5;
+}
+
+.blue{
+  color: #40D6E5  ;
+}
+
+.red{
+  color: #FF7676 ;
+}
+
+`
+
+
 
 export default Collection
