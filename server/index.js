@@ -5,8 +5,10 @@ const morgan = require("morgan");
 
 const PORT = 5100;
 
-const { getPlants } = require("./handlers/getPlants");
+const {getPlants} = require("./handlers/getPlants");
 const {getPlant} =  require("./handlers/getPlant")
+const {addPlant} = require("./handlers/addPlant")
+const {getCollection} = require("./handlers/getCollection")
 
 express()
   .use(function (req, res, next) {
@@ -33,6 +35,12 @@ express()
 
   //get a specific plant
   .get("/api/plant/:plantId", getPlant)
+
+  .post("/api/add-plant", addPlant)
+
+  .get("/api/collection", getCollection)
+
+
 
   .get("*", (request, response) => {
     return response
