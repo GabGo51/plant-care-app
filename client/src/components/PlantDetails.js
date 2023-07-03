@@ -32,19 +32,58 @@ const PlantDetails = () => {
 
   console.log(plant);
   //
+  
+  
+  
+  
+
+  const handleClick = () =>{
+    console.log(plant.common_name, plant.watering);
+      fetch("/api/add-plant", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id: plant.id,
+          name:plant.common_name,
+          water: plant.watering,
+          image: plant.default_image.original_url,
+        }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.status === 400 || data.status === 500) {
+            
+  
+            throw new Error(data.message);
+          } else {
+            console.log("Added to collection!");
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+          
+        });
+  }
   return (
 
     <>
-    {plant&&
+    {plant&& 
       <Box>
-        <h2>{plant.common_name}</h2>
+        <h2>{plant.common_name.charAt(0).toUpperCase() +  plant.common_name.slice(1)}</h2>
         <img src={plant.default_image.original_url}/>
         <p>{plant.scientific_name}</p>
         <InfoBox>
+          <p>Cycle</p>
           <Cycle>{plant.cycle}</Cycle>
+          <p>Watering</p>
           <Watering>{plant.watering}</Watering>
-          <Sunlight>{plant.sunlight[0]}</Sunlight>
+          <p>Light</p>
+          <Sunlight>{plant.sunlight[0].charAt(0).toUpperCase() + plant.sunlight[0].slice(1)}</Sunlight>
         </InfoBox>
+        <button onClick={handleClick}>Add to Collection</button>
       </Box>
       
     }
@@ -79,6 +118,7 @@ p{
 const InfoBox = styled.div`
 display: flex;
 flex-direction: column;
+align-items: center;
 
 div{
   border-radius: 40px;
@@ -86,6 +126,10 @@ div{
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+p{
+  margin: 5px;
 }
 `
 

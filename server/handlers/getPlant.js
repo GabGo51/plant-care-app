@@ -23,7 +23,7 @@ const getPlant = async (request, response) => {
   try {
     await client.connect();
     const db = client.db(DB_NAME);
-    const plantsCollection = db.collection("All-Plants");
+    const plantsCollection = db.collection("Indoor-Plants");
 
     console.log("Retrieving items...", plantId);
     // Fetch all items from the collection

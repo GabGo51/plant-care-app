@@ -43,7 +43,7 @@ const Library = () => {
         <i className="fa-solid fa-magnifying-glass"></i>
         <input 
           value={value}
-          placeholder='Search'
+          placeholder='Search Your Plant'
           type='text'
           onChange={handleChange}
         />
@@ -105,10 +105,10 @@ p{
   flex-direction: column;
   font-size: 2em;
   opacity: 0.5;
-  color: white;
+  color: black;
 
   span{
-
+    color: black;
   }
 }
 
@@ -124,6 +124,7 @@ i{
   bottom: 17px;
   left: 30px;
   scale: 1.5;
+  
 }
 `
 
