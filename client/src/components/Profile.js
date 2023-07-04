@@ -1,12 +1,16 @@
 import React from 'react'
 import { styled } from 'styled-components'
 import { useNavigate } from 'react-router-dom'
+import { useContext } from 'react'
+import { UserContext } from './UserContext'
 const Profile = () => {
+
+  const {setUser} = useContext(UserContext)
 
   const navigate = useNavigate()
 
   const handleClick = () =>{
-
+    setUser(null)
     navigate("/login")
   }
   return (
