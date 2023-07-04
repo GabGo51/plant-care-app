@@ -14,7 +14,7 @@ function App() {
       <Container>
       <ActionBar/>
       <Routes>
-        <Route path="/login" element={<Login/>}/>
+        <Route path="/" element={<Login/>}/>
         <Route path="/signup" element={<Signup/>}/>
         <Route path="/garden/:userId" element={<Garden/>}/>
         <Route path="/user" element={<Profile/>}/>

@@ -10,7 +10,7 @@ const Signup = () => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate("/login");
+    navigate("/");
   };
 
   const handleChange = (event) => {
@@ -61,7 +61,7 @@ const Signup = () => {
             throw new Error(data.message);
           } else {
             console.log("Added to Database!");
-            navigate("/login");
+            navigate("/");
           }
         })
         .catch((error) => {
