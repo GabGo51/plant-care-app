@@ -24,12 +24,12 @@ const getUser = async (request, response) => {
     await client.connect();
     const db = client.db(DB_NAME);
     const allUser = db.collection("All-Users");
-
+    
     console.log("Retrieving user...");
    
     const user = await allUser.findOne({email, password})
     if(user){
-      response.status(200).json({ status: 200, user });
+      response.status(200).json({ status: 200, user:{email, GardenId:user.GardenId} });
     }else{
       response.status(400).json({status:400, message:"Invalid email or Password"})
     }
