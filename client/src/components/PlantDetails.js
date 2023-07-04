@@ -44,6 +44,7 @@ const PlantDetails = () => {
       },
       body: JSON.stringify({
         id: plant.id,
+        uniqueId: Math.floor(Math.random()*100000),
         name: plant.common_name,
         water: plant.watering,
         image: plant.default_image.original_url,

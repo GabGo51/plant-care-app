@@ -47,9 +47,12 @@ const Login = () => {
       .then((response) => response.json())
       .then((data) => {
         if (data.status === 400 || data.status === 500 || data.status === 409) {
+          setError(true)
           throw new Error(data.message);
+          
         } else {
           setUser(data.user);
+          setError(false)
           console.log("User Found!");
           navigate(`/Garden/${user.GardenId}`);
         }
@@ -81,7 +84,7 @@ const Login = () => {
         ></input>
         <button type="submt">Login</button>
       </Info>
-      {error ? <>Invalid Email or Password</> : <></>}
+      {error ? <Error>Invalid Email or Password</Error> : <></>}
 
       <p>
         First time on Plant-Care? -{" "}
@@ -150,6 +153,13 @@ const Info = styled.form`
   flex-direction: column;
 
   align-items: center;
+`;
+
+const Error = styled.div`
+  background-color: lightpink;
+  padding: 10px 20px;
+  margin-top: 40px;
+  border-radius: 20px;
 `;
 
 export default Login;

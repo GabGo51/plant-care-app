@@ -9,7 +9,8 @@ const Garden = () => {
   const { user, setUser } = useContext(UserContext);
 
   const [collection, setCollection] = useState(null);
-
+  console.log(collection);
+  
   const navigate = useNavigate();
 
   useEffect(() => {

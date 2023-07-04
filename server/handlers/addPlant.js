@@ -14,7 +14,7 @@ const options = {
  * @param request
  * @param response
  */
-const addPlant = async (request, response) => {
+const addPlant = async (request, response, GardenId) => {
   const client = new MongoClient(MONGO_URI, options);
   const plant = request.body;
 
@@ -29,6 +29,7 @@ const addPlant = async (request, response) => {
   // information to add item to cart
   const newPlant = {
     id: plant.id,
+    uniqueId: plant.uniqueId,
     name: plant.name,
     water: plant.water,
     image: plant.image,
@@ -51,13 +52,30 @@ const addPlant = async (request, response) => {
       return;
     }
 
-    const result = await db.collection("Collection").insertOne(newPlant);
+    const gardenCollection = db.collection("Gardens");
+    const garden = await gardenCollection.findOne({ id_: GardenId });
 
-    response.status(200).json({
-      status: 200,
-      message: "New plant added to your collection.",
-      data: newPlant,
-    });
+    if(garden){
+      garden.plants.push(newPlant)
+
+      const updatedGarden = await gardenCollection.updateOne(
+        {_id:GardenId},
+        {$set:{plants: garden.plants}}
+      )
+      if (updatedGarden.modifiedCount === 1) {
+        response.status(200).json({
+          status: 200,
+          message: "New plant added to your Garden.",
+          data: newPlant,
+        });
+        console.log("Plant added to the garden!");
+      } else {
+        
+        console.log("Error updating the garden document.");
+      }
+    }
+
+    
   } catch (error) {
     console.error(error);
     response.status(500).json({

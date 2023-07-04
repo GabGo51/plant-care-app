@@ -14,7 +14,7 @@ const options = {
  * @param request
  * @param response
  */
-const getCollection = async (request, response) => {
+const getCollection = async (request, response, GardenId) => {
   const client = new MongoClient(MONGO_URI, options);
 
   try {
@@ -22,12 +22,12 @@ const getCollection = async (request, response) => {
     const db = client.db("Plant-Care");
     console.log("connected!");
 
-    const result = await db.collection("Collection").find().toArray();
+    const result = await db.collection("Gardens").findOne({_id:GardenId});
     result
       ? response
           .status(200)
-          .json({ status: 200, data: result, message: "Collection" })
-      : response.status(404).json({ status: 404, message: "Not Found" });
+          .json({ status: 200, data: result.plants, message: "Garden Found" })
+      : response.status(404).json({ status: 404, message: "Garden Not Found" });
   } catch (error) {
     console.error(error);
     response.status(500).json({
