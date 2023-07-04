@@ -10,7 +10,7 @@ const {getPlant} =  require("./handlers/getPlant")
 const {addPlant} = require("./handlers/addPlant")
 const {getCollection} = require("./handlers/getCollection")
 const {deletePlantFromCollection} = require("./handlers/deleteFromCollection")
-
+const {addUser} = require("./handlers/addUser")
 express()
   .use(function (req, res, next) {
     res.header(
@@ -42,6 +42,8 @@ express()
   .get("/api/collection", getCollection)
 
   .delete("/api/delete-plant/:plantId", deletePlantFromCollection)
+
+  .post("/api/add-user", addUser)
 
 
 

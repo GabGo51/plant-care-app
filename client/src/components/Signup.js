@@ -1,46 +1,116 @@
-import { styled } from "styled-components"
-import { useNavigate } from "react-router-dom"
+import { styled } from "styled-components";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 const Signup = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
-    const navigate = useNavigate()
+  const navigate = useNavigate();
 
-    const handleClick = () =>{
+  const handleClick = () => {
+    navigate("/login");
+  };
 
-        navigate("/login")
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    switch (name) {
+      case "email":
+        setEmail(value);
+        break;
+      case "password":
+        setPassword(value);
+        break;
+      case "confirmPassword":
+        setConfirmPassword(value);
+        break;
+      default:
+        break;
     }
+  };
 
-return(
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    fetch("/api/add-user", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            
+          email:email,
+          password:password, 
+          
+        }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.status === 400 || data.status === 500) {
+            
+  
+            throw new Error(data.message);
+          } else {
+            console.log("Added to collection!");
+            navigate("/")
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+          
+        });
+  };
+  
 
+  return (
     <Box>
-        <h1>Sign up</h1>
-        <Info>
-            <input type="email" placeholder="Email"></input>
-            <input type="password" placeholder="Password"></input>
-            <input type="password" placeholder="Confirm Password"></input>
-            <button>Sign Up</button>
-        </Info>
-        
-        <p>Already have an account? - <span onClick={handleClick}>Login</span></p>
+      <h1>Sign up</h1>
+      <Info onSubmit={handleSubmit}>
+        <input
+          name="email"
+          onChange={handleChange}
+          type="email"
+          placeholder="Email"
+          value={email}
+        ></input>
+        <input
+          name="password"
+          onChange={handleChange}
+          type="password"
+          placeholder="Password"
+          value={password}
+        ></input>
+        <input
+          name="confirmPassword"
+          onChange={handleChange}
+          type="password"
+          placeholder="Confirm Password"
+          value={confirmPassword}
+        ></input>
+        <button type="submit">Sign Up</button>
+      </Info>
 
-
+      <p>
+        Already have an account? - <span onClick={handleClick}>Login</span>
+      </p>
     </Box>
-)
-}
+  );
+};
 
 const Box = styled.div`
-display:flex;
-flex-direction:column;
-align-items: center;
-justify-content: center;
-position: relative;
-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  height: 100vh;
 
-h1{
+  h1 {
     position: absolute;
     top: 20px;
-}
+  }
 
-input{
+  input {
     font-size: 1.1em;
     outline: none;
     border: none;
@@ -50,43 +120,42 @@ input{
     border-radius: 20px;
     padding-left: 30px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-}
+  }
 
-p{
+  p {
     color: balck;
     position: absolute;
     bottom: 125px;
-    span{
-        color: lightblue;
-        cursor: pointer;
-        
+    span {
+      color: lightblue;
+      cursor: pointer;
     }
-}
+  }
 
-button{
+  button {
     font-size: 1.1em;
     margin-top: 50px;
     background-color: white;
-    padding:10px 25px;
+    padding: 10px 25px;
     border-radius: 30px;
     border: none;
     transition: 200ms;
     width: 150px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 
-    &:hover{
-        background-color: black;
-        color: white;
-        border: none;
+    &:hover {
+      background-color: black;
+      color: white;
+      border: none;
     }
-}
-`
+  }
+`;
 
-const Info = styled.div`
-display: flex;
-flex-direction: column;
+const Info = styled.form`
+  display: flex;
+  flex-direction: column;
 
-align-items: center;
-`
+  align-items: center;
+`;
 
-export default Signup
+export default Signup;
