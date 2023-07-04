@@ -10,7 +10,7 @@ const Profile = () => {
 
   const handleClick = () => {
     setUser(null);
-    navigate("/login");
+    navigate("/");
   };
   return (
     <Box>

@@ -3,7 +3,10 @@ import { useParams, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "./UserContext";
+import { useContext } from "react";
 const PlantDetails = () => {
+  const { user, setUser } = useContext(UserContext);
   const params = useParams();
   const [plant, setPlant] = useState(null);
   const navigate = useNavigate();
@@ -52,7 +55,7 @@ const PlantDetails = () => {
           throw new Error(data.message);
         } else {
           console.log("Added to collection!");
-          navigate("/");
+          navigate(`/garden/${user.GardenId}`);
         }
       })
       .catch((error) => {
@@ -80,7 +83,7 @@ const PlantDetails = () => {
                 plant.sunlight[0].slice(1)}
             </Sunlight>
           </InfoBox>
-          <button onClick={handleClick}>Add to Collection</button>
+          <button onClick={handleClick}>Add to Garden</button>
         </Box>
       )}
     </>
@@ -106,6 +109,16 @@ const Box = styled.div`
     color: black;
     margin: 20px;
     font-style: italic;
+  }
+
+  button{
+    background-color: transparent;
+    cursor: pointer;
+    color: black;
+    border: 2px solid black;
+    margin-top: 20px;
+    padding: 10px 20px;
+    border-radius: 30px;
   }
 `;
 

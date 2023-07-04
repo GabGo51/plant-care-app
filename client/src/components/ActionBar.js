@@ -1,13 +1,18 @@
 import React from "react";
 import { styled } from "styled-components";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "./UserContext";
+import { useContext } from "react";
 
+//Navigation from Garden to user using this component as a navBar
 const ActionBar = () => {
   const navigate = useNavigate();
+  const { user, setUser } = useContext(UserContext);
+  
 
   return (
     <Container>
-      <button onClick={() => navigate("/")}>
+      <button onClick={() => navigate(`/garden/${user.GardenId}`)}>
         <i className="fa-solid fa-seedling"></i>
       </button>
       <button onClick={() => navigate("/user")}>
