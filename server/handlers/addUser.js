@@ -20,11 +20,12 @@ const addUser = async (request, response) => {
   
 
   //   check if required fields are empty
-  if (!user.email||!user.password) {
+  if (!user.email||!user.password ||!user.confirmPassword) {
     response.status(400).json({
       status: 400,
       message: "Missing data!",
     });
+    console.log("Missing Data");
   }
 
   // information to add item to cart
@@ -45,6 +46,7 @@ const addUser = async (request, response) => {
         status: 404,
         message: "This email already has an account",
       });
+      console.log("This email already has an account");
       client.close();
       return;
     }

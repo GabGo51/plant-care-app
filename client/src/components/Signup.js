@@ -5,6 +5,7 @@ const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [state, setState] = useState(false)
 
   const navigate = useNavigate();
 
@@ -29,38 +30,45 @@ const Signup = () => {
     }
   };
 
+  const handleSignup = () => {
+    if (password !== confirmPassword) {
+      setState(true)
+    }else{
+      setState(false)
+    }
+
+  };
+
   const handleSubmit = (event) => {
-    event.preventDefault();
-    fetch("/api/add-user", {
+    if (password !== confirmPassword) {
+      event.preventDefault();
+    } else {
+      event.preventDefault();
+      fetch("/api/add-user", {
         method: "POST",
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-            
-          email:email,
-          password:password, 
-          
+          email: email,
+          password: password,
         }),
       })
         .then((response) => response.json())
         .then((data) => {
           if (data.status === 400 || data.status === 500) {
-            
-  
             throw new Error(data.message);
           } else {
             console.log("Added to collection!");
-            navigate("/")
+            navigate("/");
           }
         })
         .catch((error) => {
           console.error(error);
-          
         });
+    }
   };
-  
 
   return (
     <Box>
@@ -72,6 +80,7 @@ const Signup = () => {
           type="email"
           placeholder="Email"
           value={email}
+          require
         ></input>
         <input
           name="password"
@@ -79,6 +88,7 @@ const Signup = () => {
           type="password"
           placeholder="Password"
           value={password}
+          required
         ></input>
         <input
           name="confirmPassword"
@@ -86,9 +96,13 @@ const Signup = () => {
           type="password"
           placeholder="Confirm Password"
           value={confirmPassword}
+          required
         ></input>
-        <button type="submit">Sign Up</button>
+        <button onClick={handleSignup} type="submit">
+          Sign Up
+        </button>
       </Info>
+      {state?<Error>Password and Confirm Password doesnt Match!</Error>:<></>}
 
       <p>
         Already have an account? - <span onClick={handleClick}>Login</span>
@@ -157,5 +171,13 @@ const Info = styled.form`
 
   align-items: center;
 `;
+
+const Error = styled.div`
+background-color: lightpink;
+padding: 10px 20px;
+margin-top: 40px;
+border-radius: 20px;
+
+`
 
 export default Signup;
