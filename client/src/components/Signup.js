@@ -5,8 +5,8 @@ const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [state, setState] = useState(false)
-
+  const [passwordState, setPasswordState] = useState(false)
+  
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -32,9 +32,9 @@ const Signup = () => {
 
   const handleSignup = () => {
     if (password !== confirmPassword) {
-      setState(true)
+      setPasswordState(true)
     }else{
-      setState(false)
+      setPasswordState(false)
     }
 
   };
@@ -57,10 +57,10 @@ const Signup = () => {
       })
         .then((response) => response.json())
         .then((data) => {
-          if (data.status === 400 || data.status === 500) {
+          if (data.status === 400 || data.status === 500 || data.status === 409) {
             throw new Error(data.message);
           } else {
-            console.log("Added to collection!");
+            console.log("Added to Database!");
             navigate("/");
           }
         })
@@ -88,6 +88,7 @@ const Signup = () => {
           type="password"
           placeholder="Password"
           value={password}
+          minLength={8}
           required
         ></input>
         <input
@@ -96,13 +97,14 @@ const Signup = () => {
           type="password"
           placeholder="Confirm Password"
           value={confirmPassword}
+          minLength={8}
           required
         ></input>
         <button onClick={handleSignup} type="submit">
           Sign Up
         </button>
       </Info>
-      {state?<Error>Password and Confirm Password doesnt Match!</Error>:<></>}
+      {passwordState?<Error>Password and Confirm Password doesnt Match!</Error>:<></>}
 
       <p>
         Already have an account? - <span onClick={handleClick}>Login</span>
