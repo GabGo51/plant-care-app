@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { styled } from 'styled-components'
 import React from "react";
 import ActionBar from "./components/ActionBar";
-import Collection from "./components/Collection"
+import Garden from "./components/Garden"
 import Profile from "./components/Profile";
 import Library from "./components/Library";
 import PlantDetails from "./components/PlantDetails";
@@ -16,7 +16,7 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login/>}/>
         <Route path="/signup" element={<Signup/>}/>
-        <Route path="/" element={<Collection/>}/>
+        <Route path="/garden/:userId" element={<Garden/>}/>
         <Route path="/user" element={<Profile/>}/>
         <Route path="/library" element={<Library/>}/>
         <Route path="/plant/:plantId" element = {<PlantDetails/>}/>

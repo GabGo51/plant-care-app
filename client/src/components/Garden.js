@@ -2,19 +2,25 @@ import React from 'react'
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
+import { UserContext } from "./UserContext";
+import { useContext } from "react";
 
-const Collection = () => {
+
+const Garden = () => {
+
+  const {user, setUser} = useContext(UserContext)
+  
   const [collection, setCollection] = useState(null)
 
   const navigate = useNavigate()
 
   useEffect(() => {
-    console.log("hello");
+    
     fetch(`/api/collection`)
       .then((response) => response.json())
       .then((parse) => {
         setCollection(parse.data);
-        console.log(parse.data);
+        // console.log(parse.data);
       })
       .catch((error) => {
         console.log(error);
@@ -46,11 +52,11 @@ const Collection = () => {
 
   return (
     <Box>
-      <h1>Collection</h1>
+      <h1>Garden</h1>
       {collection&&
       <Content>
       {collection.map(plant =>{
-        console.log(plant);
+        // console.log(plant);
         return(
           <Plant key={plant._id}>
             <p>{plant.name}</p>
@@ -150,4 +156,4 @@ i{
 
 
 
-export default Collection
+export default Garden

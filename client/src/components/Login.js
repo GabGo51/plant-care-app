@@ -5,7 +5,7 @@ import { UserContext } from "./UserContext";
 import { useContext } from "react";
 const Login = () => {
 
-    const {setUser} = useContext(UserContext)
+    const {user,setUser} = useContext(UserContext)
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -53,7 +53,7 @@ const Login = () => {
               } else {
                 setUser(data.user)
                 console.log("User Found!");
-                navigate("/");
+                navigate(`/Garden/${user.GardenId}`);
               }
             })
             .catch((error) => {

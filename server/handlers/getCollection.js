@@ -16,7 +16,7 @@ const options = {
  */
 const getCollection = async (request, response) => {
   const client = new MongoClient(MONGO_URI, options);
-
+  
   try {
     await client.connect();
     const db = client.db("Plant-Care");
