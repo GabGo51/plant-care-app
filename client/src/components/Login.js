@@ -1,6 +1,26 @@
 import { styled } from "styled-components"
 import { useNavigate } from "react-router-dom"
+import { useState } from "react";
 const Login = () => {
+
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [user, setUser] = useState(null)
+    const [error, setError] = useState(false)
+
+    const handleChange = (event) => {
+        const { name, value } = event.target;
+        switch (name) {
+          case "email":
+            setEmail(value);
+            break;
+          case "password":
+            setPassword(value);
+            break;
+          default:
+            break;
+        }
+      };
 
     const navigate = useNavigate()
 
@@ -9,15 +29,34 @@ const Login = () => {
         navigate("/signup")
     }
 
+    const handleSubmit = (event) =>{
+        event.preventDefault()
+
+        fetch(`/api/get-user`)
+      .then((response) => response.json())
+      .then((parse) => {
+        setUser(parse.data);
+        console.log(parse.data);
+        setError(false)
+        navigate("/")
+      })
+      .catch((error) => {
+        console.log(error);
+        setError(true)
+      });
+
+    }
+
 return(
 
     <Box>
         <h1>LOGIN</h1>
-        <Info>
-            <input type="email" placeholder="Email"></input>
-            <input type="password" placeholder="Password"></input>
-            <button>Login</button>
+        <Info onSubmit={handleSubmit}>
+            <input name="email" onChange={handleChange} required value={email} type="email" placeholder="Email"></input>
+            <input name="password" onChange={handleChange}  required value={password} type="password" placeholder="Password"></input>
+            <button type="submt">Login</button>
         </Info>
+        {error? <>Invalid Email or Password</>:<></>}
         
         <p>First time on Plant-Care? - <span onClick={handleClick}>Create an Account</span></p>
 
@@ -83,7 +122,7 @@ button{
 }
 `
 
-const Info = styled.div`
+const Info = styled.form`
 display: flex;
 flex-direction: column;
 

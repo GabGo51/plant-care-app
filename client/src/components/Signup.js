@@ -61,7 +61,7 @@ const Signup = () => {
             throw new Error(data.message);
           } else {
             console.log("Added to Database!");
-            navigate("/");
+            navigate("/login");
           }
         })
         .catch((error) => {
