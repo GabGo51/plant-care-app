@@ -46,7 +46,7 @@ express()
 
   .post("/api/add-user", addUser)
 
-  .get("/api/get-user", getUser)
+  .post("/api/signin", getUser)
 
 
 

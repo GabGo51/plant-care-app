@@ -1,11 +1,14 @@
 import { styled } from "styled-components"
 import { useNavigate } from "react-router-dom"
 import { useState } from "react";
+import { UserContext } from "./UserContext";
+import { useContext } from "react";
 const Login = () => {
+
+    const {setUser} = useContext(UserContext)
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [user, setUser] = useState(null)
     const [error, setError] = useState(false)
 
     const handleChange = (event) => {
@@ -32,18 +35,30 @@ const Login = () => {
     const handleSubmit = (event) =>{
         event.preventDefault()
 
-        fetch(`/api/get-user`)
-      .then((response) => response.json())
-      .then((parse) => {
-        setUser(parse.data);
-        console.log(parse.data);
-        setError(false)
-        navigate("/")
-      })
-      .catch((error) => {
-        console.log(error);
-        setError(true)
-      });
+        fetch("/api/signin", {
+            method: "POST",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              email:email.toLowerCase(),
+            password,
+            }),
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              if (data.status === 400 || data.status === 500 || data.status === 409) {
+                throw new Error(data.message);
+              } else {
+                setUser(data.user)
+                console.log("User Found!");
+                navigate("/");
+              }
+            })
+            .catch((error) => {
+              console.error(error);
+            });
 
     }
 
