@@ -22,7 +22,7 @@ const deletePlantFromCollection = async (request, response) => {
     console.log("Connected!");
 
     // Check if the item exists in the cart
-    const checkPlant = await db.collection("Collection").find({id:plantId});
+    const checkPlant = await db.collection("Collection").find({ id: plantId });
     if (!checkPlant) {
       response.status(404).json({
         status: 404,

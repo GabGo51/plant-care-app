@@ -25,7 +25,9 @@ const getPlants = async (request, response) => {
     response.status(200).json({ status: 200, plants });
   } catch (error) {
     console.error("An error occurred while retrieving items:", error);
-    response.status(500).json({ status: 500, message: "Internal server error" });
+    response
+      .status(500)
+      .json({ status: 500, message: "Internal server error" });
   } finally {
     client.close();
   }

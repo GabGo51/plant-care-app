@@ -18,7 +18,7 @@ const options = {
 // Function to retrieve items from the database.
 const getPlant = async (request, response) => {
   const client = new MongoClient(MONGO_URI, options);
-  const plantId = request.params.plantId
+  const plantId = request.params.plantId;
 
   try {
     await client.connect();
@@ -27,16 +27,18 @@ const getPlant = async (request, response) => {
 
     console.log("Retrieving items...", plantId);
     // Fetch all items from the collection
-    const plant = await plantsCollection.findOne({id:Number(plantId)})
+    const plant = await plantsCollection.findOne({ id: Number(plantId) });
 
     // Send the items as a JSON response.
     response.status(200).json({ status: 200, plant });
   } catch (error) {
     console.error("An error occurred while retrieving items:", error);
-    response.status(500).json({ status: 500, message: "Internal server error" });
+    response
+      .status(500)
+      .json({ status: 500, message: "Internal server error" });
   } finally {
     client.close();
   }
 };
 
-module.exports = { getPlant};
+module.exports = { getPlant };

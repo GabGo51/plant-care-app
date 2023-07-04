@@ -17,7 +17,6 @@ const options = {
 const addPlant = async (request, response) => {
   const client = new MongoClient(MONGO_URI, options);
   const plant = request.body;
-  
 
   //   check if required fields are empty
   if (!plant.id) {
@@ -40,7 +39,9 @@ const addPlant = async (request, response) => {
     const db = client.db("Plant-Care");
     console.log("connected!");
 
-    const checkPlant = await db.collection("Indoor-Plants").findOne({ id: plant.id });
+    const checkPlant = await db
+      .collection("Indoor-Plants")
+      .findOne({ id: plant.id });
     if (!checkPlant) {
       response.status(404).json({
         status: 404,

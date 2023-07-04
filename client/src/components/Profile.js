@@ -1,18 +1,17 @@
-import React from 'react'
-import { styled } from 'styled-components'
-import { useNavigate } from 'react-router-dom'
-import { useContext } from 'react'
-import { UserContext } from './UserContext'
+import React from "react";
+import { styled } from "styled-components";
+import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { UserContext } from "./UserContext";
 const Profile = () => {
+  const { setUser } = useContext(UserContext);
 
-  const {setUser} = useContext(UserContext)
+  const navigate = useNavigate();
 
-  const navigate = useNavigate()
-
-  const handleClick = () =>{
-    setUser(null)
-    navigate("/login")
-  }
+  const handleClick = () => {
+    setUser(null);
+    navigate("/login");
+  };
   return (
     <Box>
       <h1>Profile</h1>
@@ -23,32 +22,31 @@ const Profile = () => {
       <div>subscribed on what date </div>
       <button onClick={handleClick}>Log out</button>
     </Box>
-  )
-}
+  );
+};
 
 const Box = styled.div`
-display: flex;
-flex-direction: column;
-align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
-button{
+  button {
     font-size: 1.1em;
     margin-top: 50px;
     background-color: white;
-    padding:10px 25px;
+    padding: 10px 25px;
     border-radius: 30px;
     border: none;
     transition: 200ms;
     width: 150px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 
-    &:hover{
-        background-color: black;
-        color: white;
-        border: none;
+    &:hover {
+      background-color: black;
+      color: white;
+      border: none;
     }
-}
-`
+  }
+`;
 
-
-export default Profile
+export default Profile;

@@ -17,16 +17,15 @@ const options = {
 const addUser = async (request, response) => {
   const client = new MongoClient(MONGO_URI, options);
   const user = request.body;
-  
 
   //   check if required fields are empty
-  if (!user.email||!user.password) {
+  if (!user.email || !user.password) {
     response.status(400).json({
       status: 400,
       message: "Missing data!",
     });
     console.log("Missing Data");
-    return
+    return;
   }
 
   // information to add item to cart
@@ -40,7 +39,9 @@ const addUser = async (request, response) => {
     const db = client.db("Plant-Care");
     console.log("connected!");
 
-    const checkUser = await db.collection("All-Users").findOne({ email: user.email});
+    const checkUser = await db
+      .collection("All-Users")
+      .findOne({ email: user.email });
     if (checkUser) {
       response.status(409).json({
         status: 409,
@@ -50,10 +51,11 @@ const addUser = async (request, response) => {
       client.close();
       return;
     }
-    const collectionId = await db.collection("Gardens").insertOne({plants:[]})
-    newUser.GardenId = collectionId.insertedId
+    const collectionId = await db
+      .collection("Gardens")
+      .insertOne({ plants: [] });
+    newUser.GardenId = collectionId.insertedId;
     const result = await db.collection("All-Users").insertOne(newUser);
-    
 
     response.status(200).json({
       status: 200,

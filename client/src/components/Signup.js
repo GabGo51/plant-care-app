@@ -5,8 +5,8 @@ const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [passwordState, setPasswordState] = useState(false)
-  
+  const [passwordState, setPasswordState] = useState(false);
+
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -32,11 +32,10 @@ const Signup = () => {
 
   const handleSignup = () => {
     if (password !== confirmPassword) {
-      setPasswordState(true)
-    }else{
-      setPasswordState(false)
+      setPasswordState(true);
+    } else {
+      setPasswordState(false);
     }
-
   };
 
   const handleSubmit = (event) => {
@@ -57,7 +56,11 @@ const Signup = () => {
       })
         .then((response) => response.json())
         .then((data) => {
-          if (data.status === 400 || data.status === 500 || data.status === 409) {
+          if (
+            data.status === 400 ||
+            data.status === 500 ||
+            data.status === 409
+          ) {
             throw new Error(data.message);
           } else {
             console.log("Added to Database!");
@@ -104,7 +107,11 @@ const Signup = () => {
           Sign Up
         </button>
       </Info>
-      {passwordState?<Error>Password and Confirm Password doesnt Match!</Error>:<></>}
+      {passwordState ? (
+        <Error>Password and Confirm Password doesnt Match!</Error>
+      ) : (
+        <></>
+      )}
 
       <p>
         Already have an account? - <span onClick={handleClick}>Login</span>
@@ -175,11 +182,10 @@ const Info = styled.form`
 `;
 
 const Error = styled.div`
-background-color: lightpink;
-padding: 10px 20px;
-margin-top: 40px;
-border-radius: 20px;
-
-`
+  background-color: lightpink;
+  padding: 10px 20px;
+  margin-top: 40px;
+  border-radius: 20px;
+`;
 
 export default Signup;
