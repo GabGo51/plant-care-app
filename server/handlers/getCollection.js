@@ -14,15 +14,17 @@ const options = {
  * @param request
  * @param response
  */
-const getCollection = async (request, response, GardenId) => {
+const getCollection = async (request, response) => {
   const client = new MongoClient(MONGO_URI, options);
+  const gardenId = request.params.gardenId
+  console.log(gardenId);
 
   try {
     await client.connect();
     const db = client.db("Plant-Care");
     console.log("connected!");
 
-    const result = await db.collection("Gardens").findOne({_id:GardenId});
+    const result = await db.collection("Gardens").findOne({_id:gardenId});
     result
       ? response
           .status(200)

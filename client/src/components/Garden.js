@@ -4,9 +4,12 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { UserContext } from "./UserContext";
 import { useContext } from "react";
+import { useParams } from "react-router-dom";
 
 const Garden = () => {
   const { user, setUser } = useContext(UserContext);
+  const params = useParams()
+  console.log(params);
 
   const [collection, setCollection] = useState(null);
   console.log(collection);
@@ -14,9 +17,10 @@ const Garden = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch(`/api/collection`)
+    fetch(`/api/garden/${params.gardenId}`)
       .then((response) => response.json())
       .then((parse) => {
+        console.log(parse);
         setCollection(parse.data);
         // console.log(parse.data);
       })

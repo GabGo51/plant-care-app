@@ -1,4 +1,5 @@
 const { MongoClient } = require("mongodb");
+const { v4: uuidv4 } = require('uuid');
 
 require("dotenv").config();
 const { MONGO_URI } = process.env;
@@ -51,10 +52,11 @@ const addUser = async (request, response) => {
       client.close();
       return;
     }
+   const _id = uuidv4();
     const collectionId = await db
       .collection("Gardens")
-      .insertOne({ plants: [] });
-    newUser.GardenId = collectionId.insertedId;
+      .insertOne({_id: _id, plants: [] });
+    newUser.gardenId = collectionId.insertedId;
     const result = await db.collection("All-Users").insertOne(newUser);
 
     response.status(200).json({

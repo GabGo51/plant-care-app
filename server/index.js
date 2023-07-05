@@ -40,7 +40,7 @@ express()
 
   .post("/api/add-plant", addPlant)
 
-  .get("/api/collection", getCollection)
+  .get("/api/garden/:gardenId", getCollection)
 
   .delete("/api/delete-plant/:plantId", deletePlantFromCollection)
 

@@ -54,7 +54,7 @@ const Login = () => {
           setUser(data.user);
           setError(false)
           console.log("User Found!");
-          navigate(`/Garden/${user.GardenId}`);
+          navigate(`/Garden/${user.gardenId}`);
         }
       })
       .catch((error) => {

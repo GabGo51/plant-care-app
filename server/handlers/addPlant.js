@@ -14,9 +14,9 @@ const options = {
  * @param request
  * @param response
  */
-const addPlant = async (request, response, GardenId) => {
+const addPlant = async (request, response, gardenId) => {
   const client = new MongoClient(MONGO_URI, options);
-  const plant = request.body;
+  const plant = request.params.plantId;
 
   //   check if required fields are empty
   if (!plant.id) {
@@ -53,13 +53,13 @@ const addPlant = async (request, response, GardenId) => {
     }
 
     const gardenCollection = db.collection("Gardens");
-    const garden = await gardenCollection.findOne({ id_: GardenId });
+    const garden = await gardenCollection.findOne({ id_: gardenId });
 
     if(garden){
       garden.plants.push(newPlant)
 
       const updatedGarden = await gardenCollection.updateOne(
-        {_id:GardenId},
+        {_id:gardenId},
         {$set:{plants: garden.plants}}
       )
       if (updatedGarden.modifiedCount === 1) {

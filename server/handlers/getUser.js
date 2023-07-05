@@ -30,7 +30,7 @@ const getUser = async (request, response) => {
     if (user) {
       response
         .status(200)
-        .json({ status: 200, user: { email, GardenId: user.GardenId } });
+        .json({ status: 200, user: { email, gardenId: user.gardenId } });
     } else {
       response
         .status(400)
