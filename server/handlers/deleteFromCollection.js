@@ -14,26 +14,33 @@ const options = {
  */
 const deletePlantFromCollection = async (request, response) => {
   const client = new MongoClient(MONGO_URI, options);
-  const plantId = request.body.plantId;
+  const plantId = request.params.plantId;
+  const gardenId = request.body.gardenId
 
   try {
     await client.connect();
     const db = client.db("Plant-Care");
     console.log("Connected!");
 
-    // Check if the item exists in the cart
-    const checkPlant = await db.collection("Collection").find({ id: plantId });
-    if (!checkPlant) {
-      response.status(404).json({
-        status: 404,
-        message: "Plant not found in the collection.",
-      });
-      client.close();
-      return;
-    }
-
+    
+    
     // Delete the item from the cart
-    await db.collection("Collection").deleteOne();
+    const gardenCollection = db.collection("Gardens");
+    const garden = await gardenCollection.findOne({ _id: gardenId });
+
+    const updatedCollection = garden.plants.filter(
+      (plant) => plant.uniqueId !== parseInt(plantId)
+    );
+    const query = { _id: gardenId }
+    const patch = {$set:{plants:updatedCollection}}
+
+
+     const result = await gardenCollection.updateOne(query, patch)
+     console.log(result);
+     console.log(plantId);
+     console.log(updatedCollection);
+
+    console.log(garden.plants);
 
     response.status(200).json({
       status: 200,

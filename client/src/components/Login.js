@@ -54,7 +54,7 @@ const Login = () => {
           setUser(data.user);
           setError(false)
           console.log("User Found!");
-          navigate(`/Garden/${user.gardenId}`);
+          navigate(`/Garden/${data.user.gardenId}`);
         }
       })
       .catch((error) => {
@@ -82,7 +82,7 @@ const Login = () => {
           type="password"
           placeholder="Password"
         ></input>
-        <button type="submt">Login</button>
+        <button type="submit">Login</button>
       </Info>
       {error ? <Error>Invalid Email or Password</Error> : <></>}
 

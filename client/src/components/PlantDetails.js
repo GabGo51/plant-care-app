@@ -48,6 +48,7 @@ const PlantDetails = () => {
         name: plant.common_name,
         water: plant.watering,
         image: plant.default_image.original_url,
+        gardenId:user.gardenId,
       }),
     })
       .then((response) => response.json())
@@ -56,7 +57,7 @@ const PlantDetails = () => {
           throw new Error(data.message);
         } else {
           console.log("Added to collection!");
-          navigate(`/garden/${user.GardenId}`);
+          navigate(`/garden/${user.gardenId}`);
         }
       })
       .catch((error) => {

@@ -8,6 +8,7 @@ import { useParams } from "react-router-dom";
 
 const Garden = () => {
   const { user, setUser } = useContext(UserContext);
+  console.log(user);
   const params = useParams()
   console.log(params);
 
@@ -33,12 +34,19 @@ const Garden = () => {
     // Perform delete request to remove a single item from the cart
     fetch(`/api/delete-plant/${plantId}`, {
       method: "DELETE",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        gardenId:user.gardenId,
+      }),
     })
       .then((response) => {
         if (response.ok) {
           // Update the cartItems state to reflect the deletion
           const updatedCollection = collection.filter(
-            (plant) => plant._id !== plantId
+            (plant) => plant.uniqueId !== plantId
           );
           setCollection(updatedCollection);
         } else {
@@ -56,7 +64,7 @@ const Garden = () => {
       {collection && (
         <Content>
           {collection.map((plant) => {
-            // console.log(plant);
+            console.log(plant);
             return (
               <Plant key={plant._id}>
                 <p>{plant.name}</p>
@@ -65,7 +73,7 @@ const Garden = () => {
                   <img src={plant.image} />
                   <i
                     className="fa-regular fa-trash-can red"
-                    onClick={() => handleDelete(plant._id)}
+                    onClick={() => handleDelete(plant.uniqueId)}
                   ></i>
                 </Main>
                 <p>timer</p>
