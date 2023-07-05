@@ -6,49 +6,46 @@ import { UserContext } from "./UserContext";
 import { useContext } from "react";
 import { useParams } from "react-router-dom";
 
+//Display of the user plant collection, where he can delete and water the plant in his collection
 const Garden = () => {
-  const { user, setUser } = useContext(UserContext);
-  console.log(user);
+  const { user } = useContext(UserContext);
   const params = useParams()
-  console.log(params);
-
-  const [collection, setCollection] = useState(null);
-  console.log(collection);
+  const [garden, setGarden] = useState(null);
   
   const navigate = useNavigate();
 
+  //Fetching the individual garden
   useEffect(() => {
     fetch(`/api/garden/${params.gardenId}`)
       .then((response) => response.json())
       .then((parse) => {
-        console.log(parse);
-        setCollection(parse.data);
-        // console.log(parse.data);
+        setGarden(parse.data);
       })
       .catch((error) => {
         console.log(error);
       });
-  }, [setCollection]);
+  }, [setGarden]);
 
+  //Delete function to remove a plant from garden
   const handleDelete = (plantId) => {
-    // Perform delete request to remove a single item from the cart
     fetch(`/api/delete-plant/${plantId}`, {
       method: "DELETE",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
       },
+      //sending the garden id
       body: JSON.stringify({
         gardenId:user.gardenId,
       }),
     })
       .then((response) => {
         if (response.ok) {
-          // Update the cartItems state to reflect the deletion
-          const updatedCollection = collection.filter(
+          // Update the collection and reset the garden to that collection
+          const updatedGarden = garden.filter(
             (plant) => plant.uniqueId !== plantId
           );
-          setCollection(updatedCollection);
+          setGarden(updatedGarden);
         } else {
           throw new Error("Error deleting plant from collection");
         }
@@ -61,9 +58,9 @@ const Garden = () => {
   return (
     <Box>
       <h1>Garden</h1>
-      {collection && (
+      {garden && (
         <Content>
-          {collection.map((plant) => {
+          {garden.map((plant) => {
             console.log(plant);
             return (
               <Plant key={plant._id}>

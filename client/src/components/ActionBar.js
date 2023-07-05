@@ -7,8 +7,7 @@ import { useContext } from "react";
 //Navigation from Garden to user using this component as a navBar
 const ActionBar = () => {
   const navigate = useNavigate();
-  const { user, setUser } = useContext(UserContext);
-  console.log(user);
+  const { user } = useContext(UserContext);
 
   return (
     <Container>
