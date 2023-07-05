@@ -17,6 +17,7 @@ const options = {
 const addPlant = async (request, response, gardenId) => {
   const client = new MongoClient(MONGO_URI, options);
   const plant = request.params.plantId;
+  console.log(plant);
 
   //   check if required fields are empty
   if (!plant.id) {

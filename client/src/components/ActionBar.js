@@ -8,11 +8,11 @@ import { useContext } from "react";
 const ActionBar = () => {
   const navigate = useNavigate();
   const { user, setUser } = useContext(UserContext);
-  
+  console.log(user);
 
   return (
     <Container>
-      <button onClick={() => navigate(`/garden/${user.GardenId}`)}>
+      <button onClick={() => navigate(`/garden/${user.gardenId}`)}>
         <i className="fa-solid fa-seedling"></i>
       </button>
       <button onClick={() => navigate("/user")}>
