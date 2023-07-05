@@ -14,7 +14,7 @@ const options = {
  * @param request
  * @param response
  */
-const getCollection = async (request, response) => {
+const getGarden = async (request, response) => {
   const client = new MongoClient(MONGO_URI, options);
   const gardenId = request.params.gardenId
   console.log(gardenId);
@@ -41,4 +41,4 @@ const getCollection = async (request, response) => {
   console.log("disconnected!");
 };
 
-module.exports = { getCollection };
+module.exports = { getGarden };

@@ -8,8 +8,8 @@ const PORT = 5100;
 const {getPlants} = require("./handlers/getPlants");
 const {getPlant} =  require("./handlers/getPlant")
 const {addPlant} = require("./handlers/addPlant")
-const {getCollection} = require("./handlers/getCollection")
-const {deletePlantFromCollection} = require("./handlers/deleteFromCollection")
+const {getGarden} = require("./handlers/getGarden")
+const {deletePlant} = require("./handlers/deletePlant")
 const {addUser} = require("./handlers/addUser")
 const {getUser} = require("./handlers/getUser")
 express()
@@ -40,9 +40,9 @@ express()
 
   .post("/api/add-plant", addPlant)
 
-  .get("/api/garden/:gardenId", getCollection)
+  .get("/api/garden/:gardenId", getGarden)
 
-  .delete("/api/delete-plant/:plantId", deletePlantFromCollection)
+  .delete("/api/delete-plant/:plantId", deletePlant)
 
   .post("/api/add-user", addUser)
 

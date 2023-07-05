@@ -12,7 +12,7 @@ const options = {
  * @param request
  * @param response
  */
-const deletePlantFromCollection = async (request, response) => {
+const deletePlant = async (request, response) => {
   const client = new MongoClient(MONGO_URI, options);
   const plantId = request.params.plantId;
   const gardenId = request.body.gardenId
@@ -31,16 +31,10 @@ const deletePlantFromCollection = async (request, response) => {
     const updatedCollection = garden.plants.filter(
       (plant) => plant.uniqueId !== parseInt(plantId)
     );
+
     const query = { _id: gardenId }
     const patch = {$set:{plants:updatedCollection}}
-
-
-     const result = await gardenCollection.updateOne(query, patch)
-     console.log(result);
-     console.log(plantId);
-     console.log(updatedCollection);
-
-    console.log(garden.plants);
+    await gardenCollection.updateOne(query, patch)
 
     response.status(200).json({
       status: 200,
@@ -58,4 +52,4 @@ const deletePlantFromCollection = async (request, response) => {
   }
 };
 
-module.exports = { deletePlantFromCollection };
+module.exports = { deletePlant};
