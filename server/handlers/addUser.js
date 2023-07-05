@@ -10,11 +10,7 @@ const options = {
 };
 ("use strict");
 
-/**
- * add an item in cart
- * @param request
- * @param response
- */
+//Adding a user to the db 
 const addUser = async (request, response) => {
   const client = new MongoClient(MONGO_URI, options);
   const user = request.body;
@@ -29,7 +25,7 @@ const addUser = async (request, response) => {
     return;
   }
 
-  // information to add item to cart
+  // information to add user to db
   const newUser = {
     email: user.email,
     password: user.password,
@@ -52,7 +48,8 @@ const addUser = async (request, response) => {
       client.close();
       return;
     }
-   const _id = uuidv4();
+    //creating an id both for the user.gardenId and the garden._id so that they match
+    const _id = uuidv4();
     const collectionId = await db
       .collection("Gardens")
       .insertOne({_id: _id, plants: [] });

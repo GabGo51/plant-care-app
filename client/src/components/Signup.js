@@ -1,18 +1,20 @@
 import { styled } from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+
+//Creation of a user and posting it on the db
 const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [passwordState, setPasswordState] = useState(false);
-
   const navigate = useNavigate();
 
   const handleClick = () => {
     navigate("/");
   };
 
+  //Tracking the inputs value
   const handleChange = (event) => {
     const { name, value } = event.target;
     switch (name) {
@@ -30,6 +32,7 @@ const Signup = () => {
     }
   };
 
+  //Make sure P and CP are the same before posting 
   const handleSignup = () => {
     if (password !== confirmPassword) {
       setPasswordState(true);
@@ -38,6 +41,7 @@ const Signup = () => {
     }
   };
 
+  //Posting new User to db 
   const handleSubmit = (event) => {
     if (password !== confirmPassword) {
       event.preventDefault();

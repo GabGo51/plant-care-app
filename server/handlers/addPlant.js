@@ -9,18 +9,14 @@ const options = {
 };
 ("use strict");
 
-/**
- * add an item in cart
- * @param request
- * @param response
- */
+//Adding a plant to the user Garden
 const addPlant = async (request, response) => {
   const client = new MongoClient(MONGO_URI, options);
   const plant = request.body;
-  const gardenId = request.body.gardenId
+  const gardenId = request.body.gardenId //need this to target user garden
   console.log(plant);
 
-  //   check if required fields are empty
+  //check if plant exists in db
   if (!plant.id) {
     response.status(400).json({
       status: 400,
@@ -28,7 +24,7 @@ const addPlant = async (request, response) => {
     });
   }
 
-  // information to add item to cart
+  // information to add plant to collection
   const newPlant = {
     id: plant.id,
     uniqueId: plant.uniqueId,
@@ -54,12 +50,14 @@ const addPlant = async (request, response) => {
       return;
     }
 
+    //targeting the right garden
     const gardenCollection = db.collection("Gardens");
     const garden = await gardenCollection.findOne({ _id: gardenId });
 
+    //if garden found push the plant into its plants Array
     if(garden){
       garden.plants.push(newPlant)
-
+      //if garden is updated send a ok 
       const updatedGarden = await gardenCollection.updateOne(
         {_id:gardenId},
         {$set:{plants: garden.plants}}
@@ -76,8 +74,6 @@ const addPlant = async (request, response) => {
         console.log("Error updating the garden document.");
       }
     }
-
-    
   } catch (error) {
     console.error(error);
     response.status(500).json({

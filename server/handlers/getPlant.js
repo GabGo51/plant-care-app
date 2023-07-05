@@ -8,14 +8,7 @@ const options = {
   useUnifiedTopology: true,
 };
 
-/**
- * getItem fetches an item using the itemId set from the request
- *  parameter from MongoDB and returns in the response the item.
- * @param request
- * @param response
- */
-
-// Function to retrieve items from the database.
+// Getting a specific plant from the All-Plants db
 const getPlant = async (request, response) => {
   const client = new MongoClient(MONGO_URI, options);
   const plantId = request.params.plantId;
@@ -26,10 +19,10 @@ const getPlant = async (request, response) => {
     const plantsCollection = db.collection("Indoor-Plants");
 
     console.log("Retrieving items...", plantId);
-    // Fetch all items from the collection
+    // Finding the plant
     const plant = await plantsCollection.findOne({ id: Number(plantId) });
 
-    // Send the items as a JSON response.
+    
     response.status(200).json({ status: 200, plant });
   } catch (error) {
     console.error("An error occurred while retrieving items:", error);

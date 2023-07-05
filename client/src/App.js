@@ -8,6 +8,8 @@ import Library from "./components/Library";
 import PlantDetails from "./components/PlantDetails";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
+
+//all Paths
 function App() {
   return (
     <Router>

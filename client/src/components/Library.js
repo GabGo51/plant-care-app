@@ -2,19 +2,24 @@ import React from "react";
 import { styled } from "styled-components";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+
+//Display of an Autofill SearchBar that gives you the link to different plants
 const Library = () => {
   const [allPlants, setAllPlants] = useState([]);
   const [value, setValue] = useState("");
   const navigate = useNavigate();
 
+  // Get matching plants from the SB value and the database
   const matchedPlants = allPlants.filter((plant) => {
     if (value.length < 2) {
       return false;
     }
     return plant.common_name.toLowerCase().includes(value.toLowerCase());
   });
+  //Limit to not overflow the page with suggestion
   const limit = matchedPlants.slice(0, 9);
 
+  //Fetching all the plants from the db
   useEffect(() => {
     fetch(`/api/get-plants`)
       .then((response) => response.json())
@@ -26,7 +31,6 @@ const Library = () => {
       });
   }, []);
 
-  console.log(matchedPlants);
 
   const handleChange = (event) => {
     setValue(event.target.value);
@@ -52,6 +56,7 @@ const Library = () => {
           const index = plant.common_name
             .toLowerCase()
             .indexOf(value.toLowerCase());
+          // Splitting result in half for bold effect
           const firstHalf = plant.common_name.slice(0, index + value.length);
           const secondHalf = plant.common_name.slice(index + value.length);
           const handleClick = () => {

@@ -8,7 +8,7 @@ const options = {
   useUnifiedTopology: true,
 };
 
-// Function to retrieve items from the database.
+//Get all Plants from the db 
 const getPlants = async (request, response) => {
   const client = new MongoClient(MONGO_URI, options);
 
@@ -18,10 +18,10 @@ const getPlants = async (request, response) => {
     const plantsCollection = db.collection("Indoor-Plants");
 
     console.log("Retrieving items...");
-    // Fetch all items from the collection
+    //putting them all in an array
     const plants = await plantsCollection.find().toArray();
 
-    // Send the items as a JSON response.
+    
     response.status(200).json({ status: 200, plants });
   } catch (error) {
     console.error("An error occurred while retrieving items:", error);

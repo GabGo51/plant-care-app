@@ -7,11 +7,7 @@ const options = {
   useUnifiedTopology: true,
 };
 
-/**
- * Delete an item from the cart
- * @param request
- * @param response
- */
+//deleting a plant from the garden
 const deletePlant = async (request, response) => {
   const client = new MongoClient(MONGO_URI, options);
   const plantId = request.params.plantId;
@@ -24,16 +20,18 @@ const deletePlant = async (request, response) => {
 
     
     
-    // Delete the item from the cart
+    // Targeting the good garden to edit 
     const gardenCollection = db.collection("Gardens");
     const garden = await gardenCollection.findOne({ _id: gardenId });
-
+    //edit the collection
     const updatedCollection = garden.plants.filter(
       (plant) => plant.uniqueId !== parseInt(plantId)
     );
 
     const query = { _id: gardenId }
     const patch = {$set:{plants:updatedCollection}}
+    
+    //update the db with the edited collection
     await gardenCollection.updateOne(query, patch)
 
     response.status(200).json({

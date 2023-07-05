@@ -8,13 +8,7 @@ const options = {
   useUnifiedTopology: true,
 };
 
-/**
- * getItem fetches an item using the itemId set from the request
- *  parameter from MongoDB and returns in the response the item.
- * @param request
- * @param response
- */
-
+//Get a user from the All-Users db
 const getUser = async (request, response) => {
   const client = new MongoClient(MONGO_URI, options);
   const { email, password } = request.body;
@@ -26,6 +20,7 @@ const getUser = async (request, response) => {
 
     console.log("Retrieving user...");
 
+    //find a matching users user email and pw
     const user = await allUser.findOne({ email, password });
     if (user) {
       response

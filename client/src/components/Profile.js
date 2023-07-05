@@ -3,6 +3,9 @@ import { styled } from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { UserContext } from "./UserContext";
+
+
+//Page to display information about the user
 const Profile = () => {
   const { setUser } = useContext(UserContext);
 

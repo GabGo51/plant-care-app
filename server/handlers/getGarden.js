@@ -9,13 +9,10 @@ const options = {
 };
 ("use strict");
 
-/**
- * getCart fetches all the items in cart
- * @param request
- * @param response
- */
+//Finding the user garden
 const getGarden = async (request, response) => {
   const client = new MongoClient(MONGO_URI, options);
+  //asking for the garden id 
   const gardenId = request.params.gardenId
   console.log(gardenId);
 
@@ -24,6 +21,7 @@ const getGarden = async (request, response) => {
     const db = client.db("Plant-Care");
     console.log("connected!");
 
+    //matching it with the gardens db 
     const result = await db.collection("Gardens").findOne({_id:gardenId});
     result
       ? response

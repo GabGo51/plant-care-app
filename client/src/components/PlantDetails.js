@@ -5,13 +5,15 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "./UserContext";
 import { useContext } from "react";
+
+//Page that displays information about a plant, also where you can Add it to your collection
 const PlantDetails = () => {
-  const { user, setUser } = useContext(UserContext);
+  const { user } = useContext(UserContext);
   const params = useParams();
   const [plant, setPlant] = useState(null);
   const navigate = useNavigate();
 
-  // fetching the product details and the company details
+  // fetching the plant details
   useEffect(() => {
     const fetchPlantData = async () => {
       try {
@@ -20,22 +22,20 @@ const PlantDetails = () => {
           throw new Error("Failed to fetch plant data");
         }
         const plantData = await response.json();
-        console.log(plantData);
+        
         setPlant(plantData.plant);
       } catch (error) {
         console.error(error);
         // Handle error state or display an error message
       }
     };
-
     fetchPlantData();
   }, [params.plantId]);
 
-  console.log(plant);
-  //
-
+  
+  //Adding a plant to your collection
   const handleClick = () => {
-    console.log(plant.common_name, plant.watering);
+    
     fetch("/api/add-plant", {
       method: "POST",
       headers: {

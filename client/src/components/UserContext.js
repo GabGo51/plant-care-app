@@ -1,7 +1,8 @@
 import { createContext } from "react";
 
 import { useState } from "react";
-// we made all of this so we can still get the information from the backend upon refreshing the page
+
+//Context to keep track of the user logged in 
 export const UserContext = createContext(null);
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);

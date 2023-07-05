@@ -3,13 +3,16 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { UserContext } from "./UserContext";
 import { useContext } from "react";
-const Login = () => {
-  const { user, setUser } = useContext(UserContext);
 
+//Login page for user to enter info 
+const Login = () => {
+
+  const {setUser} = useContext(UserContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
 
+  //Tracking inputs value
   const handleChange = (event) => {
     const { name, value } = event.target;
     switch (name) {
@@ -30,6 +33,7 @@ const Login = () => {
     navigate("/signup");
   };
 
+  //Comparing Input values to data base to see if user exists
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -40,7 +44,7 @@ const Login = () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        email: email.toLowerCase(),
+        email: email.toLowerCase(), //make sure its not case sensitiv for email 
         password,
       }),
     })
