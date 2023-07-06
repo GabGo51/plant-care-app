@@ -11,6 +11,8 @@ const Plant = ({plant, garden ,setGarden}) => {
   const { user } = useContext(UserContext);
   const [waterTime, setWaterTime] = useState(Date.now())
   const [danger, setDanger] = useState(false)
+  const [percent, setPercent] = useState()
+  
 
   useEffect(() => {
 
@@ -18,20 +20,18 @@ const Plant = ({plant, garden ,setGarden}) => {
     setDanger(true)
     }
 
-    if (plant.timer - waterTime <0){
+    if (plant.timer - waterTime < 0){
       setWaterTime(0)
+      setPercent(0)
     }else {
       setWaterTime(plant.timer - waterTime)
+      setPercent(Math.floor((plant.timer-waterTime)/plant.timer*100))
     }
     
-  }, []);
-  console.log(danger);
-
+  }, [setPercent]);
   
-
-  
-
-  
+   
+  console.log(percent);
 
   const handleDelete = (plantId) => {
     fetch(`/api/delete-plant/${plantId}`, {
@@ -61,7 +61,7 @@ const Plant = ({plant, garden ,setGarden}) => {
       });
   };
   return (
-    <Box key={plant._id}>
+    <Box>
       <p>{plant.name}</p>
       <Main danger = {danger}>
         <i className="fa-solid fa-droplet blue"></i>
@@ -72,6 +72,18 @@ const Plant = ({plant, garden ,setGarden}) => {
         ></i>
       </Main>
       <p>{waterTime}</p>
+      {percent>75&& 
+      <>
+        <i className="fa-solid fa-battery-full"></i>
+        <>{percent}%</>
+      </>
+      }
+      {percent<2 && 
+      <>
+        <i className="fa-solid fa-battery-empty"></i>
+        <>{percent}%</>
+      </>
+      }
     </Box>
   );
 };

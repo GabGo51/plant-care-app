@@ -52,7 +52,7 @@ const addPlant = async (request, response) => {
     name: plant.name,
     water: plant.water,
     image: plant.image,
-    timer: waterTime,
+    timer: waterTime
   };
 
   try {

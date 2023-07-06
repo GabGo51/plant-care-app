@@ -36,9 +36,9 @@ const Garden = () => {
       {garden && (
         <Content>
           {garden.map((plant) => {
-            console.log(plant);
+            
             return (
-              <Plant plant={plant} garden={garden} setGarden={setGarden}/>
+              <Plant key={plant.uniqueId} plant={plant} garden={garden} setGarden={setGarden}/>
             );
           })}
         </Content>
