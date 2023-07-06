@@ -45,7 +45,7 @@ const Login = () => {
       },
       body: JSON.stringify({
         email: email.toLowerCase(), //make sure its not case sensitiv for email 
-        password,
+        password
       }),
     })
       .then((response) => response.json())
@@ -56,9 +56,11 @@ const Login = () => {
           
         } else {
           setUser(data.user);
+          window.localStorage.setItem("email", data.user.email)
           setError(false)
           console.log("User Found!");
           navigate(`/Garden/${data.user.gardenId}`);
+          
         }
       })
       .catch((error) => {

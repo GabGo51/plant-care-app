@@ -12,6 +12,9 @@ const {getGarden} = require("./handlers/getGarden")
 const {deletePlant} = require("./handlers/deletePlant")
 const {addUser} = require("./handlers/addUser")
 const {getUser} = require("./handlers/getUser")
+const {getEmail} = require("./handlers/getEmail")
+
+
 express()
   .use(function (req, res, next) {
     res.header(
@@ -32,6 +35,8 @@ express()
 
   // END POINT.
 
+
+  .post("/api/signinemail", getEmail)
   //get all the plants
   .get("/api/get-plants", getPlants)
 
@@ -48,12 +53,13 @@ express()
 
   .post("/api/signin", getUser)
 
-
-
   .get("*", (request, response) => {
     return response
       .status(404)
       .json({ status: 404, message: "No endpoint found." });
   })
+
+  
+
 
   .listen(PORT, () => console.info(`Listening on port ${PORT}`));

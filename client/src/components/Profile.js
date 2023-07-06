@@ -13,6 +13,7 @@ const Profile = () => {
 
   const handleClick = () => {
     setUser(null);
+    localStorage.removeItem("email")
     navigate("/");
   };
   return (

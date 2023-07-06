@@ -26,6 +26,8 @@ const Garden = () => {
         console.log(error);
       });
   }, [setGarden]);
+
+  
   
 
   return (
