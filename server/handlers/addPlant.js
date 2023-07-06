@@ -24,6 +24,8 @@ const addPlant = async (request, response) => {
     });
   }
 
+  //send date .now + timer
+  //compare that time with the time they open the garden 
   let timer;
 
   if (plant.water === "Frequent") {
@@ -38,6 +40,8 @@ const addPlant = async (request, response) => {
   if (plant.water === "None") {
     timer = 30 * 24 * 60 * 60 * 1000; // 1 month in milliseconds
   }
+
+  const waterTime = Date.now() + timer
     
   
 
@@ -48,7 +52,7 @@ const addPlant = async (request, response) => {
     name: plant.name,
     water: plant.water,
     image: plant.image,
-    timer: timer
+    timer: waterTime,
   };
 
   try {

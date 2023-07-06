@@ -1,10 +1,37 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { styled } from "styled-components";
 import { UserContext } from "./UserContext";
 import { useContext } from "react";
+import { useState } from "react";
+import { keyframes, css } from 'styled-components';
+
+
 const Plant = ({plant, garden ,setGarden}) => {
 
   const { user } = useContext(UserContext);
+  const [waterTime, setWaterTime] = useState(Date.now())
+  const [danger, setDanger] = useState(false)
+
+  useEffect(() => {
+
+    if (plant.timer - waterTime < 3600000){
+    setDanger(true)
+    }
+
+    if (plant.timer - waterTime <0){
+      setWaterTime(0)
+    }else {
+      setWaterTime(plant.timer - waterTime)
+    }
+    
+  }, []);
+  console.log(danger);
+
+  
+
+  
+
+  
 
   const handleDelete = (plantId) => {
     fetch(`/api/delete-plant/${plantId}`, {
@@ -36,18 +63,31 @@ const Plant = ({plant, garden ,setGarden}) => {
   return (
     <Box key={plant._id}>
       <p>{plant.name}</p>
-      <Main>
+      <Main danger = {danger}>
         <i className="fa-solid fa-droplet blue"></i>
-        <img src={plant.image} />
+        <img  src={plant.image} />
         <i
           className="fa-regular fa-trash-can red"
           onClick={() => handleDelete(plant.uniqueId)}
         ></i>
       </Main>
-      <p>{plant.timer}</p>
+      <p>{waterTime}</p>
     </Box>
   );
 };
+
+const bounceAnimation = keyframes`
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+    filter: brightness(70%) sepia(100%) saturate(200%) hue-rotate(-30deg);
+  }
+  100% {
+    transform: scale(1);
+  }
+`;
 
 const Box = styled.div`
   display: flex;
@@ -55,11 +95,16 @@ const Box = styled.div`
   justify-content: center;
   flex-direction: column;
   margin: 20px;
+  p{
+    margin: 10px 20px;
+  }
 `;
 
 const Main = styled.div`
   display: flex;
   align-items: center;
+
+  
   i {
     margin: 0px 30px;
     scale: 1.5;
@@ -76,6 +121,14 @@ const Main = styled.div`
 
   .red {
     color: #ff7676;
+  }
+
+  img {
+    ${({ danger }) =>
+      danger &&
+      css`
+        animation: ${bounceAnimation} 1s infinite;
+      `}
   }
 `;
 
