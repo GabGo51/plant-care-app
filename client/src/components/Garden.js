@@ -1,4 +1,5 @@
 import React from "react";
+import Plant from "./Plant";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
@@ -25,35 +26,7 @@ const Garden = () => {
         console.log(error);
       });
   }, [setGarden]);
-
-  //Delete function to remove a plant from garden
-  const handleDelete = (plantId) => {
-    fetch(`/api/delete-plant/${plantId}`, {
-      method: "DELETE",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      //sending the garden id
-      body: JSON.stringify({
-        gardenId:user.gardenId,
-      }),
-    })
-      .then((response) => {
-        if (response.ok) {
-          // Update the collection and reset the garden to that collection
-          const updatedGarden = garden.filter(
-            (plant) => plant.uniqueId !== plantId
-          );
-          setGarden(updatedGarden);
-        } else {
-          throw new Error("Error deleting plant from collection");
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
+  
 
   return (
     <Box>
@@ -63,18 +36,7 @@ const Garden = () => {
           {garden.map((plant) => {
             console.log(plant);
             return (
-              <Plant key={plant._id}>
-                <p>{plant.name}</p>
-                <Main>
-                  <i className="fa-solid fa-droplet blue"></i>
-                  <img src={plant.image} />
-                  <i
-                    className="fa-regular fa-trash-can red"
-                    onClick={() => handleDelete(plant.uniqueId)}
-                  ></i>
-                </Main>
-                <p>{plant.timer}</p>
-              </Plant>
+              <Plant plant={plant} garden={garden} setGarden={setGarden}/>
             );
           })}
         </Content>
@@ -127,34 +89,8 @@ const Content = styled.section`
   justify-content: center;
 `;
 
-const Plant = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  margin: 20px;
-`;
 
-const Main = styled.div`
-  display: flex;
-  align-items: center;
-  i {
-    margin: 0px 30px;
-    scale: 1.5;
-    transition: 200ms;
 
-    &:hover {
-      scale: 1.65;
-    }
-  }
 
-  .blue {
-    color: #40d6e5;
-  }
-
-  .red {
-    color: #ff7676;
-  }
-`;
 
 export default Garden;

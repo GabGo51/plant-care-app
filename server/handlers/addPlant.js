@@ -23,21 +23,22 @@ const addPlant = async (request, response) => {
       message: "Missing data!",
     });
   }
-  let timer = 0
 
-  if(plant.water === "Frequent"){
-    timer = 24
+  let timer;
+
+  if (plant.water === "Frequent") {
+    timer = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
   }
-  if(plant.water === "Average"){
-    timer = 36
+  if (plant.water === "Average") {
+    timer = 7 * 24 * 60 * 60 * 1000; // 1 week in milliseconds
   }
-  if(plant.water === "Minimum"){
-    timer = 100
+  if (plant.water === "Minimum") {
+    timer = 14 * 24 * 60 * 60 * 1000; // 2 weeks in milliseconds
   }
-  if(plant.water === "None"){
-    timer = 200
+  if (plant.water === "None") {
+    timer = 30 * 24 * 60 * 60 * 1000; // 1 month in milliseconds
   }
-  
+    
   
 
   // information to add plant to collection
