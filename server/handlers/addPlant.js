@@ -23,6 +23,22 @@ const addPlant = async (request, response) => {
       message: "Missing data!",
     });
   }
+  let timer = 0
+
+  if(plant.water === "Frequent"){
+    timer = 24
+  }
+  if(plant.water === "Average"){
+    timer = 36
+  }
+  if(plant.water === "Minimum"){
+    timer = 100
+  }
+  if(plant.water === "None"){
+    timer = 200
+  }
+  
+  
 
   // information to add plant to collection
   const newPlant = {
@@ -31,6 +47,7 @@ const addPlant = async (request, response) => {
     name: plant.name,
     water: plant.water,
     image: plant.image,
+    timer: timer
   };
 
   try {

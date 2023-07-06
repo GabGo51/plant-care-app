@@ -73,7 +73,7 @@ const Garden = () => {
                     onClick={() => handleDelete(plant.uniqueId)}
                   ></i>
                 </Main>
-                <p>timer</p>
+                <p>{plant.timer}</p>
               </Plant>
             );
           })}
