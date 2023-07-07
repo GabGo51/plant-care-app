@@ -3,34 +3,35 @@ import { styled } from "styled-components";
 import { UserContext } from "./UserContext";
 import { useContext } from "react";
 import { useState } from "react";
-import { keyframes, css } from 'styled-components';
+import { keyframes, css } from "styled-components";
 
-
-const Plant = ({plant, garden ,setGarden}) => {
-
+const Plant = ({ plant, garden, setGarden }) => {
   const { user } = useContext(UserContext);
-  const [waterTime, setWaterTime] = useState(Date.now())
-  const [danger, setDanger] = useState(false)
-  const [percent, setPercent] = useState()
-  
+  const [waterTime, setWaterTime] = useState(Date.now()); //initial date
+  const [danger, setDanger] = useState(false);
+  const [percent, setPercent] = useState(100);
+  console.log(plant);
+
+  const percentage = Math.floor(((plant.waterTime - waterTime) / plant.timer) * 100)
 
   useEffect(() => {
-
-    if (plant.timer - waterTime < 3600000){
-    setDanger(true)
+    if (plant.waterTime - waterTime < 0) {
+      setWaterTime(0);
+      setPercent(0);
+    } else {
+      setWaterTime(plant.waterTime - waterTime);
+      setPercent(
+        percentage
+      );
     }
 
-    if (plant.timer - waterTime < 0){
-      setWaterTime(0)
-      setPercent(0)
-    }else {
-      setWaterTime(plant.timer - waterTime)
-      setPercent(Math.floor((plant.timer-waterTime)/plant.timer*100))
+    if (percentage < 5) {
+      setDanger(true);
+    }else{
+      setDanger(false)
     }
-    
-  }, [setPercent]);
-  
-   
+  }, []);
+
   console.log(percent);
 
   const handleDelete = (plantId) => {
@@ -42,7 +43,7 @@ const Plant = ({plant, garden ,setGarden}) => {
       },
       //sending the garden id
       body: JSON.stringify({
-        gardenId:user.gardenId,
+        gardenId: user.gardenId,
       }),
     })
       .then((response) => {
@@ -62,28 +63,45 @@ const Plant = ({plant, garden ,setGarden}) => {
   };
   return (
     <Box>
-      <p>{plant.name}</p>
-      <Main danger = {danger}>
+      <h3>{plant.name}</h3>
+      <Main danger={danger}>
         <i className="fa-solid fa-droplet blue"></i>
-        <img  src={plant.image} />
+        <img src={plant.image} />
         <i
           className="fa-regular fa-trash-can red"
           onClick={() => handleDelete(plant.uniqueId)}
         ></i>
       </Main>
-      <p>{waterTime}</p>
-      {percent>75&& 
-      <>
-        <i className="fa-solid fa-battery-full"></i>
-        <>{percent}%</>
-      </>
-      }
-      {percent<2 && 
-      <>
-        <i className="fa-solid fa-battery-empty"></i>
-        <>{percent}%</>
-      </>
-      }
+      {percent > 80 && (
+        <Battery>
+          <i className="fa-solid fa-battery-full green"></i>
+          <p>{percent}%</p>
+        </Battery>
+      )}
+      {percent < 80 && percent > 50 && (
+        <Battery>
+          <i className="fa-solid fa-battery-three-quarters green"></i>
+          <p>{percent}%</p>
+        </Battery>
+      )}
+      {percent < 50 && percent > 25 && (
+        <Battery>
+          <i className="fa-solid fa-battery-half yellow"></i>
+          <p>{percent}%</p>
+        </Battery>
+      )}
+      {percent < 25 && percent > 5 && (
+        <Battery>
+          <i className="fa-solid fa-battery-quarter yellow"></i>
+          <p>{percent}%</p>
+        </Battery>
+      )}
+      {percent < 5 && (
+        <Battery>
+          <i className="fa-solid fa-battery-empty red"></i>
+          <p>{percent}%</p>
+        </Battery>
+      )}
     </Box>
   );
 };
@@ -107,16 +125,41 @@ const Box = styled.div`
   justify-content: center;
   flex-direction: column;
   margin: 20px;
-  p{
-    margin: 10px 20px;
+
+  h3 {
+    margin-bottom: 10px;
   }
+  p {
+    margin-left: 10px;
+  }
+
+  i {
+    scale: 1.5;
+  }
+
+  .green {
+    color: #41d673;
+  }
+
+  .red {
+    color: #ff7676;
+  }
+  .yellow {
+    color: #dee323;
+  }
+`;
+
+const Battery = styled.div`
+  display: flex;
+  align-items: center;
+  margin-right: -35px;
+  margin-top: 10px;
 `;
 
 const Main = styled.div`
   display: flex;
   align-items: center;
 
-  
   i {
     margin: 0px 30px;
     scale: 1.5;
