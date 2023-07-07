@@ -135,6 +135,7 @@ const Box = styled.div`
   h1 {
     position: absolute;
     top: 20px;
+    font-weight: 500;
   }
 
   input {
