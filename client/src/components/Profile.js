@@ -3,7 +3,7 @@ import { styled } from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { UserContext } from "./UserContext";
-
+import ActionBar from "./ActionBar";
 
 //Page to display information about the user
 const Profile = () => {
@@ -17,15 +17,19 @@ const Profile = () => {
     navigate("/");
   };
   return (
-    <Box>
-      <h1>Profile</h1>
-      <div>user name</div>
-      <div>user email</div>
-      <div>bio</div>
-      <div>number of plants in collection</div>
-      <div>subscribed on what date </div>
-      <button onClick={handleClick}>Log out</button>
-    </Box>
+    <>
+      <Box>
+        <h1>Profile</h1>
+        <div>user name</div>
+        <div>user email</div>
+        <div>bio</div>
+        <div>number of plants in collection</div>
+        <div>subscribed on what date </div>
+        <button onClick={handleClick}>Log out</button>
+      </Box>
+      <ActionBar />
+    </>
+    
   );
 };
 
@@ -33,6 +37,10 @@ const Box = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  h1{
+    font-weight: 500;
+  }
 
   button {
     font-size: 1.1em;

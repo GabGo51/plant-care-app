@@ -2,7 +2,7 @@ import React from "react";
 import { styled } from "styled-components";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import ActionBar from "./ActionBar";
 //Display of an Autofill SearchBar that gives you the link to different plants
 const Library = () => {
   const [allPlants, setAllPlants] = useState([]);
@@ -31,49 +31,51 @@ const Library = () => {
       });
   }, []);
 
-
   const handleChange = (event) => {
     setValue(event.target.value);
   };
 
   return (
-    <Box>
-      <InputBox>
-        <i className="fa-solid fa-magnifying-glass"></i>
-        <input
-          value={value}
-          placeholder="Search Your Plant"
-          type="text"
-          onChange={handleChange}
-        />
-      </InputBox>
-      <p>
-        Search for<span>your plant :)</span>{" "}
-      </p>
+    <>
+      <Box>
+        <InputBox>
+          <i className="fa-solid fa-magnifying-glass"></i>
+          <input
+            value={value}
+            placeholder="Search Your Plant"
+            type="text"
+            onChange={handleChange}
+          />
+        </InputBox>
+        <p>
+          Search for<span>your plant :)</span>{" "}
+        </p>
 
-      <List>
-        {limit.map((plant) => {
-          const index = plant.common_name
-            .toLowerCase()
-            .indexOf(value.toLowerCase());
-          // Splitting result in half for bold effect
-          const firstHalf = plant.common_name.slice(0, index + value.length);
-          const secondHalf = plant.common_name.slice(index + value.length);
-          const handleClick = () => {
-            navigate(`/plant/${plant.id}`);
-            setValue("");
-          };
-          return (
-            <ListItem key={plant.id} onClick={handleClick}>
-              <span>
-                {firstHalf}
-                <Prediction>{secondHalf}</Prediction>
-              </span>
-            </ListItem>
-          );
-        })}
-      </List>
-    </Box>
+        <List>
+          {limit.map((plant) => {
+            const index = plant.common_name
+              .toLowerCase()
+              .indexOf(value.toLowerCase());
+            // Splitting result in half for bold effect
+            const firstHalf = plant.common_name.slice(0, index + value.length);
+            const secondHalf = plant.common_name.slice(index + value.length);
+            const handleClick = () => {
+              navigate(`/plant/${plant.id}`);
+              setValue("");
+            };
+            return (
+              <ListItem key={plant.id} onClick={handleClick}>
+                <span>
+                  {firstHalf}
+                  <Prediction>{secondHalf}</Prediction>
+                </span>
+              </ListItem>
+            );
+          })}
+        </List>
+      </Box>
+      <ActionBar />
+    </>
   );
 };
 
@@ -84,6 +86,7 @@ const Box = styled.div`
   padding-bottom: 100px;
   width: 100%;
   position: relative;
+  padding-bottom: 200px;
 
   input {
     margin-top: 20px;

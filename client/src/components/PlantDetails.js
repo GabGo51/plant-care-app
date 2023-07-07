@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "./UserContext";
 import { useContext } from "react";
-
+import ActionBar from "./ActionBar";
 //Page that displays information about a plant, also where you can Add it to your collection
 const PlantDetails = () => {
   const { user } = useContext(UserContext);
@@ -88,6 +88,7 @@ const PlantDetails = () => {
           <button onClick={handleClick}>Add to Garden</button>
         </Box>
       )}
+      <ActionBar />
     </>
   );
 };
@@ -96,6 +97,7 @@ const Box = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-bottom: 200px;
   h2 {
     color: black;
     margin: 20px 0px;

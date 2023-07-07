@@ -37,11 +37,6 @@ export const UserProvider = ({ children }) => {
         console.error(error);
       });
     }
-
-
-
-
-
   },[])
 
   return (

@@ -10,16 +10,21 @@ const ActionBar = () => {
   const { user } = useContext(UserContext);
   console.log(user);
   return (
-    <Container>
-      <ButtonPlant to={`/garden/${user.gardenId}`} activeClassName="active">
-        <p>Plants</p>
-        <i className="fa-solid fa-seedling plant"></i>
-      </ButtonPlant>
-      <ButtonProfile to="/user" activeClassName="active">
-        <i className="fa-solid fa-user profile"></i>
-        <p>Profile</p>
-      </ButtonProfile>
-    </Container>
+    <>
+      {user &&
+      <Container>
+        <ButtonPlant to={`/garden/${user.gardenId}`} activeClassName="active">
+          <p>Plants</p>
+          <i className="fa-solid fa-seedling plant"></i>
+        </ButtonPlant>
+        <ButtonProfile to="/user" activeClassName="active">
+          <i className="fa-solid fa-user profile"></i>
+          <p>Profile</p>
+        </ButtonProfile>
+      </Container>
+      }
+    </>
+    
   );
 };
 

@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 import { UserContext } from "./UserContext";
 import { useContext } from "react";
 import { useParams } from "react-router-dom";
-
+import ActionBar from "./ActionBar";
 //Display of the user plant collection, where he can delete and water the plant in his collection
 const Garden = () => {
   const { user } = useContext(UserContext);
@@ -31,21 +31,25 @@ const Garden = () => {
   
 
   return (
-    <Box>
-      <h1>Garden</h1>
-      {garden && (
-        <Content>
-          {garden.map((plant) => {
-            
-            return (
-              <Plant key={plant.uniqueId} plant={plant} garden={garden} setGarden={setGarden}/>
-            );
-          })}
-        </Content>
-      )}
+    <>
+      <Box>
+        <h1>Garden</h1>
+        {garden && (
+          <Content>
+            {garden.map((plant) => {
+              
+              return (
+                <Plant key={plant.uniqueId} plant={plant} garden={garden} setGarden={setGarden}/>
+              );
+            })}
+          </Content>
+        )}
 
-      <button onClick={() => navigate("/library")}>+</button>
-    </Box>
+        <button onClick={() => navigate("/library")}>Add Plant</button>
+      </Box>
+      <ActionBar />
+    </>
+    
   );
 };
 
@@ -54,25 +58,26 @@ const Box = styled.div`
   position: relative;
   flex-direction: column;
   align-items: center;
-  height: 100vh;
+  padding-bottom: 200px;
+  
 
   button {
-    width: 50px;
+    width: 100px;
     height: 50px;
-    border-radius: 50%;
-    font-size: 2em;
+    border-radius: 30px;
+    font-size: 1em;
     position: fixed;
     top: 10px;
     right: 10px;
-    background-color: black;
-    color: white;
-    font-weight: bold;
-    border: 2px solid black;
+    background-color: white;
+    color: #7C9B8F;
+    border: none;
+    font-weight: 500;
     transition: 300ms;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     &:hover {
-      background-color: white;
-      color: black;
-      border: none;
+      border: 1.8px solid #2fd896;
+      color: #2fd896;
     }
   }
 
@@ -81,6 +86,11 @@ const Box = styled.div`
     height: 150px;
     object-fit: cover;
     border-radius: 50%;
+  }
+
+  h1{
+    margin: 20px 0px;
+    font-weight: 500;
   }
 `;
 

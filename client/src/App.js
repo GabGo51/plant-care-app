@@ -14,7 +14,6 @@ function App() {
   return (
     <Router>
       <Container>
-        <ActionBar />
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/signup" element={<Signup />} />

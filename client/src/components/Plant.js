@@ -91,9 +91,18 @@ const Plant = ({ plant, garden, setGarden }) => {
         console.error(error);
       });
   };
+
+  const words = plant.name.split(" ");
+  const capitalizedWords = words.map(function(word) {
+    return word.charAt(0).toUpperCase() + word.slice(1);
+  });
+  const capName = capitalizedWords.join(" ");
+
+  
+
   return (
     <Box>
-      <h3>{plant.name}</h3>
+      <h3>{capName}</h3>
       <Main danger={danger}>
         <i
           className="fa-solid fa-droplet blue"
@@ -158,9 +167,14 @@ const Box = styled.div`
   justify-content: center;
   flex-direction: column;
   margin: 20px;
+  background-color: white;
+  border-radius: 30px;
+  padding: 30px 10px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 
   h3 {
     margin-bottom: 10px;
+    font-weight: 500;
   }
   p {
     margin-left: 10px;
@@ -199,7 +213,7 @@ const Main = styled.div`
     transition: 200ms;
 
     &:hover {
-      scale: 1.75;
+      scale: 1.8;
     }
   }
 
