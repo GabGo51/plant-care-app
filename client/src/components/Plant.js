@@ -12,7 +12,9 @@ const Plant = ({ plant, garden, setGarden }) => {
   const [percent, setPercent] = useState(100);
   console.log(plant);
 
-  const percentage = Math.floor(((plant.waterTime - waterTime) / plant.timer) * 100)
+  const percentage = Math.floor(
+    ((plant.waterTime - waterTime) / plant.timer) * 100
+  );
 
   useEffect(() => {
     if (plant.waterTime - waterTime < 0) {
@@ -20,15 +22,13 @@ const Plant = ({ plant, garden, setGarden }) => {
       setPercent(0);
     } else {
       setWaterTime(plant.waterTime - waterTime);
-      setPercent(
-        percentage
-      );
+      setPercent(percentage);
     }
 
     if (percentage < 5) {
       setDanger(true);
-    }else{
-      setDanger(false)
+    } else {
+      setDanger(false);
     }
   }, []);
 
@@ -61,11 +61,61 @@ const Plant = ({ plant, garden, setGarden }) => {
         console.error(error);
       });
   };
+
+  const handleWater = (plantId) => {
+    fetch(`/api/water-plant/${plantId}`, {
+      method: "PATCH",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      //sending the garden id
+      body: JSON.stringify({
+        gardenId: user.gardenId,
+      }),
+    })
+      .then((response) => {
+        if (response.ok) {
+          // Update the collection and reset the garden to that collection
+          const updatedGarden = garden.plants.map((plant) => {
+            let timer;
+
+            if (plant.water === "Frequent") {
+              timer = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
+            }
+            if (plant.water === "Average") {
+              timer = 600000; // 1 week in milliseconds
+            }
+            if (plant.water === "Minimum") {
+              timer = 14 * 24 * 60 * 60 * 1000; // 2 weeks in milliseconds
+            }
+            if (plant.water === "None") {
+              timer = 30 * 24 * 60 * 60 * 1000; // 1 month in milliseconds
+            }
+
+            const waterTime = Date.now() + timer;
+            if (plant.uniqueId === parseInt(plantId)) {
+              plant.waterTime = waterTime;
+            }
+            return plant;
+          });
+          setGarden(updatedGarden);
+        } else {
+          throw new Error("Error deleting plant from collection");
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
   return (
     <Box>
       <h3>{plant.name}</h3>
       <Main danger={danger}>
-        <i className="fa-solid fa-droplet blue"></i>
+        <i
+          className="fa-solid fa-droplet blue"
+          onClick={() => handleWater(plant.uniqueId)}
+        ></i>
         <img src={plant.image} />
         <i
           className="fa-regular fa-trash-can red"
