@@ -10,8 +10,8 @@ const Plant = ({ plant, garden, setGarden }) => {
   const [waterTime, setWaterTime] = useState(Date.now()); //initial date
   const [danger, setDanger] = useState(false);
   const [percent, setPercent] = useState(100);
-  console.log(plant);
-
+  
+  
   const percentage = Math.floor(
     ((plant.waterTime - waterTime) / plant.timer) * 100
   );
@@ -31,6 +31,8 @@ const Plant = ({ plant, garden, setGarden }) => {
       setDanger(false);
     }
   }, []);
+
+  //dummy state here
 
   console.log(percent);
 
@@ -77,29 +79,10 @@ const Plant = ({ plant, garden, setGarden }) => {
       .then((response) => {
         if (response.ok) {
           // Update the collection and reset the garden to that collection
-          const updatedGarden = garden.plants.map((plant) => {
-            let timer;
-
-            if (plant.water === "Frequent") {
-              timer = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
-            }
-            if (plant.water === "Average") {
-              timer = 600000; // 1 week in milliseconds
-            }
-            if (plant.water === "Minimum") {
-              timer = 14 * 24 * 60 * 60 * 1000; // 2 weeks in milliseconds
-            }
-            if (plant.water === "None") {
-              timer = 30 * 24 * 60 * 60 * 1000; // 1 month in milliseconds
-            }
-
-            const waterTime = Date.now() + timer;
-            if (plant.uniqueId === parseInt(plantId)) {
-              plant.waterTime = waterTime;
-            }
-            return plant;
-          });
-          setGarden(updatedGarden);
+          
+          console.log("hello");
+          setPercent(100);
+          setDanger(false)
         } else {
           throw new Error("Error deleting plant from collection");
         }
@@ -216,7 +199,7 @@ const Main = styled.div`
     transition: 200ms;
 
     &:hover {
-      scale: 1.65;
+      scale: 1.75;
     }
   }
 
