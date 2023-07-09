@@ -71,6 +71,8 @@ const Login = () => {
   return (
     <Box>
       <h1>LOGIN</h1>
+
+      <i class="fa-solid fa-seedling"></i>
       <Info onSubmit={handleSubmit}>
         <input
           name="email"
@@ -114,6 +116,12 @@ const Box = styled.div`
     font-weight: 500;
   }
 
+  i{
+
+    transform: translateY(-200%);
+    scale: 6;
+  }
+
   input {
     font-size: 1.1em;
     outline: none;
@@ -121,7 +129,7 @@ const Box = styled.div`
     margin: 20px;
     width: 300px;
     padding: 10px;
-    border-radius: 20px;
+    border-radius: 30px;
     padding-left: 30px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   }
@@ -130,10 +138,19 @@ const Box = styled.div`
     color: black;
     position: absolute;
     bottom: 125px;
+    width: 370px;
     span {
       color: lightblue;
       cursor: pointer;
     }
+
+    @media screen and (max-width: 400px) {
+  
+      width: 250px;
+      text-align: center;
+    }
+
+
   }
 
   button {
@@ -166,7 +183,7 @@ const Error = styled.div`
   background-color: lightpink;
   padding: 10px 20px;
   margin-top: 40px;
-  border-radius: 20px;
+  border-radius: 30px;
 `;
 
 export default Login;
