@@ -120,6 +120,11 @@ const Box = styled.div`
 
     transform: translateY(-200%);
     scale: 6;
+
+    @media screen and (max-width: 400px) {
+  
+      transform: translateY(-100%);
+    }
   }
 
   input {

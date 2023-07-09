@@ -25,7 +25,7 @@ const getEmail = async (request, response) => {
     if (user) {
       response
         .status(200)
-        .json({ status: 200, user: { email, gardenId: user.gardenId } });
+        .json({ status: 200, user: { email, time:user.time , gardenId: user.gardenId } });
     } else {
       response
         .status(400)

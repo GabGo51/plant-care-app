@@ -143,6 +143,8 @@ const Box = styled.div`
 
     transform: translateY(-200%);
     scale: 6;
+
+    transform: translateY(-100%);
   }
 
   input {

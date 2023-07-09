@@ -42,13 +42,13 @@ const Library = () => {
           <i className="fa-solid fa-magnifying-glass"></i>
           <input
             value={value}
-            placeholder="Search Your Plant"
+            placeholder=""
             type="text"
             onChange={handleChange}
           />
         </InputBox>
         <p>
-          Search for<span>your plant :)</span>{" "}
+          Search for<span>your plant </span><span><i class="fa-solid fa-leaf"></i> </span>
         </p>
 
         <List>
@@ -108,6 +108,7 @@ const Box = styled.div`
     font-size: 2em;
     opacity: 0.5;
     color: black;
+    text-align: center;
 
     span {
       color: black;
@@ -121,7 +122,7 @@ const InputBox = styled.div`
 
   i {
     position: absolute;
-    bottom: 17px;
+    bottom: 20px;
     left: 30px;
     scale: 1.5;
   }
@@ -130,6 +131,7 @@ const InputBox = styled.div`
 const List = styled.ul`
   width: 80%;
   margin-top: 30px;
+  z-index: 20;
 `;
 
 const ListItem = styled.li`

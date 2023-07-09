@@ -15,6 +15,11 @@ const addUser = async (request, response) => {
   const client = new MongoClient(MONGO_URI, options);
   const user = request.body;
 
+  const currentDate = new Date();
+  const day = currentDate.getDate();
+  const month = currentDate.toLocaleString('default', { month: 'long' });
+  const year = currentDate.getFullYear();
+
   //   check if required fields are empty
   if (!user.email || !user.password) {
     response.status(400).json({
@@ -29,6 +34,7 @@ const addUser = async (request, response) => {
   const newUser = {
     email: user.email,
     password: user.password,
+    time: `${month} ${day} ${year}`,
   };
 
   try {
