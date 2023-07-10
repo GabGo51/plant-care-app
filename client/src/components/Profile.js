@@ -101,6 +101,12 @@ button{
   margin: 0;
 
 }
+input{
+  outline: none;
+  border: none;
+  border-radius: 30px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
 `
 
 export default Profile;

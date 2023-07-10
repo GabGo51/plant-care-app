@@ -64,11 +64,11 @@ const Box = styled.div`
   button {
     width: 100px;
     height: 50px;
-    border-radius: 30px;
+    border-radius: 30px 0 0 30px;
     font-size: 1em;
     position: fixed;
-    top: 10px;
-    right: 10px;
+    top: 45vh;
+    right: 0;
     background-color: white;
     color: #7C9B8F;
     border: none;
@@ -78,6 +78,7 @@ const Box = styled.div`
     &:hover {
       border: 1.8px solid #2fd896;
       color: #2fd896;
+      border-right: 1px solid white;
     }
   }
 
