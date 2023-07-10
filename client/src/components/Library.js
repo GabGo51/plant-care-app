@@ -8,6 +8,7 @@ const Library = () => {
   const [allPlants, setAllPlants] = useState([]);
   const [value, setValue] = useState("");
   const navigate = useNavigate();
+  
 
   // Get matching plants from the SB value and the database
   const matchedPlants = allPlants.filter((plant) => {

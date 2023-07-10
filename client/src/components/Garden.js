@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import { UserContext } from "./UserContext";
 import { useContext } from "react";
 import { useParams } from "react-router-dom";
+
 import ActionBar from "./ActionBar";
 //Display of the user plant collection, where he can delete and water the plant in his collection
 const Garden = () => {
@@ -14,6 +15,9 @@ const Garden = () => {
   const [garden, setGarden] = useState(null);
   
   const navigate = useNavigate();
+  if(!user){
+    navigate("/")
+  }
 
   //Fetching the individual garden
   useEffect(() => {

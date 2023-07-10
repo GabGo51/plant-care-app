@@ -12,6 +12,12 @@ const Profile = () => {
   const [name, setName] = useState(null)
   const [garden, setGarden] = useState(0)
 
+  const navigate = useNavigate();
+  if(!user){
+    navigate("/")
+  }
+
+
   useEffect(() => {
     user&&
     fetch(`/api/garden/${user.gardenId}`)
@@ -26,7 +32,7 @@ const Profile = () => {
   }, [user]);
   
 
-  const navigate = useNavigate();
+  
 
   const handleChange = (event) =>{
     setName(event.target.value)

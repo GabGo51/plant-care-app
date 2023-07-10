@@ -8,7 +8,11 @@ import { NavLink } from "react-router-dom";
 //Navigation from Garden to user using this component as a navBar
 const ActionBar = () => {
   const { user } = useContext(UserContext);
-  console.log(user);
+  const navigate = useNavigate()
+
+  if(!user){
+    navigate("/")
+  }
   return (
     <>
       {user &&
