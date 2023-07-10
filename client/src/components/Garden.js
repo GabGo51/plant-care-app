@@ -15,7 +15,7 @@ const Garden = () => {
   const [garden, setGarden] = useState(null);
   
   const navigate = useNavigate();
-  if(!user){
+  if(!user || !garden){
     navigate("/")
   }
 

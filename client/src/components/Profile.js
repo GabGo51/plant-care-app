@@ -10,7 +10,7 @@ import ActionBar from "./ActionBar";
 const Profile = () => {
   const { user, setUser } = useContext(UserContext);
   const [name, setName] = useState(null)
-  const [garden, setGarden] = useState(0)
+  const [garden, setGarden] = useState(null)
 
   const navigate = useNavigate();
   if(!user){
