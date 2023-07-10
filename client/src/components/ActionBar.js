@@ -14,7 +14,7 @@ const ActionBar = () => {
       {user &&
       <Container>
         <ButtonPlant to={`/garden/${user.gardenId}`} activeClassName="active">
-          <p>Plants</p>
+          <p>Garden</p>
           <i className="fa-solid fa-seedling plant"></i>
         </ButtonPlant>
         <ButtonProfile to="/user" activeClassName="active">

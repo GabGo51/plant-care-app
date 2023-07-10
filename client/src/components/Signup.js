@@ -79,7 +79,7 @@ const Signup = () => {
 
   return (
     <Box>
-      <h1>Sign up</h1>
+      <h1>BLOOM</h1>
       <i class="fa-solid fa-seedling"></i>
       <Info onSubmit={handleSubmit}>
         <input

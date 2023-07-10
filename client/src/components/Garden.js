@@ -76,9 +76,7 @@ const Box = styled.div`
     transition: 300ms;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     &:hover {
-      border: 1.8px solid #2fd896;
-      color: #2fd896;
-      border-right: 1px solid white;
+      scale: 1.1;
     }
   }
 
@@ -87,6 +85,8 @@ const Box = styled.div`
     height: 150px;
     object-fit: cover;
     border-radius: 50%;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    
   }
 
   h1{

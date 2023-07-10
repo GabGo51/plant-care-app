@@ -14,6 +14,7 @@ const {addUser} = require("./handlers/addUser")
 const {getUser} = require("./handlers/getUser")
 const {getEmail} = require("./handlers/getEmail");
 const { waterPlant } = require("./handlers/waterPlant");
+const { addName } = require("./handlers/addName");
 
 
 express()
@@ -51,6 +52,8 @@ express()
   .delete("/api/delete-plant/:plantId", deletePlant)
 
   .patch("/api/water-plant/:plantId", waterPlant)
+
+  .patch("/api/add-name/:userId", addName)
 
   .post("/api/add-user", addUser)
 
