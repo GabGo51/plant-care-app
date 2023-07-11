@@ -44,12 +44,7 @@ const Garden = () => {
       });
   }, [setGarden]);
 
-  const handleMoon = () =>{
-    setMode(false)
-  }
-  const handleSun = () =>{
-    setMode(true)
-  }
+  
 
   
 
@@ -58,7 +53,7 @@ const Garden = () => {
   return (
     <>
       <Box mode={mode} empty = {empty}>
-        <h1>Garden</h1>
+        <h1>BLOOM</h1>
 
         {garden && (
           garden.length !== 0 ?
@@ -79,8 +74,8 @@ const Garden = () => {
           </Content>
           :
           <Empty>
-          <p>Your Garden is empty!</p>
-          <p>Add a plant </p>
+          <p>Your Garden is empty</p>
+          
           
           <i class="fa-brands fa-pagelines"></i>
           </Empty>
@@ -89,8 +84,7 @@ const Garden = () => {
         <button mode = {mode} empty = {empty} onClick={() => navigate("/library")}>Add Plant</button>
         
       </Box>
-      <Moon mode={mode} onClick={handleMoon}><i class="fa-solid fa-moon"></i></Moon>
-      <Sun mode={mode} onClick = {handleSun}> <i class="fa-solid fa-sun"></i></Sun>
+      
       <ActionBar />
     </>
   );
@@ -145,13 +139,7 @@ const Box = styled.div`
     
   }
 
-  img {
-    width: 150px;
-    height: 150px;
-    object-fit: cover;
-    border-radius: 50%;
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-  }
+  
 
   h1 {
     margin: 20px 0px;
@@ -184,27 +172,6 @@ line-height: 45px;
   margin-top: 140px;
   scale: 3;
 }
-`
-
-const Moon = styled.button`
-position: fixed;
-color: ${({mode}) => mode?"black":"#DBDBDB  "};
-top: 10px;
-right: 10px;
-background-color: transparent;
-border: none;
-cursor: pointer;
-`
-
-const Sun = styled.button`
-position: fixed;
-color: ${({mode}) => mode?"black":"#DBDBDB   "};
-top: 10px;
-left: 10px;
-background-color: transparent;
-border: none;
-cursor: pointer;
-
 `
 
 export default Garden;

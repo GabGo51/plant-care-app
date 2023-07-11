@@ -4,6 +4,7 @@ import { UserContext } from "./UserContext";
 import { useContext } from "react";
 import { useState } from "react";
 import { keyframes, css } from "styled-components";
+import zzz from "../Img/giphy2.gif"
 
 //individual plants in the garden displayed with
 //the buttons and batery level displayed
@@ -110,11 +111,13 @@ const Plant = ({ plant, garden, setGarden, empty, setEmpty }) => {
     <Box mode={mode}>
       <h3>{capName(plant.name)}</h3>
       <Main danger={danger}>
+        {!mode&&<Zzz src={zzz} />}
+      
         <i
           className="fa-solid fa-droplet blue"
           onClick={() => handleWater(plant.uniqueId)}
         ></i>
-        <img src={plant.image} />
+        <PlantImg src={plant.image} />
         <i
           className="fa-regular fa-trash-can red"
           onClick={() => handleDelete(plant.uniqueId)}
@@ -156,18 +159,6 @@ const Plant = ({ plant, garden, setGarden, empty, setEmpty }) => {
 };
 
 //animation for danger state
-const bounceAnimation = keyframes`
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.05);
-    filter: brightness(70%) sepia(100%) saturate(200%) hue-rotate(-30deg);
-  }
-  100% {
-    transform: scale(1);
-  }
-`;
 
 const Box = styled.div`
   display: flex;
@@ -204,6 +195,10 @@ const Box = styled.div`
   .yellow {
     color: #dee323;
   }
+
+  
+  
+  
 `;
 
 const Battery = styled.div`
@@ -216,6 +211,7 @@ const Battery = styled.div`
 const Main = styled.div`
   display: flex;
   align-items: center;
+  position: relative;
 
   i {
     margin: 0px 30px;
@@ -234,14 +230,45 @@ const Main = styled.div`
   .red {
     color: #ff7676;
   }
+  
 
-  img {
+  
+`;
+
+const Zzz = styled.img`
+width:50px;
+transform: scaleX(1);
+position: absolute;
+z-index: 20;
+top: 0px;
+right: 20px;
+`
+
+const bounceAnimation = keyframes`
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+    filter: brightness(70%) sepia(100%) saturate(200%) hue-rotate(-30deg);
+  }
+  100% {
+    transform: scale(1);
+  }
+`;
+
+const PlantImg = styled.img`
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    transform: scaleX(-1);
     ${({ danger }) =>
       danger &&
       css`
         animation: ${bounceAnimation} 1s infinite;
       `}
-  }
-`;
+`
 
 export default Plant;

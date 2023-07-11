@@ -81,7 +81,7 @@ const Profile = () => {
   return (
     <>
       <Box mode={mode}>
-        <h1>Profile</h1>
+        <h1>BLOOM</h1>
         {user && (
           <Info mode={mode}>
             {user.name ? (
