@@ -8,7 +8,7 @@ import ActionBar from "./ActionBar";
 
 //Page to display information about the user
 const Profile = () => {
-  const { user, setUser, mode } = useContext(UserContext);
+  const { user, setUser, mode, setMode} = useContext(UserContext);
   const [name, setName] = useState(null);
   const [garden, setGarden] = useState(null);
 
@@ -70,6 +70,14 @@ const Profile = () => {
         console.error(error);
       });
   };
+
+  const handleMoon = () =>{
+    setMode(false)
+  }
+  const handleSun = () =>{
+    setMode(true)
+  }
+
   return (
     <>
       <Box mode={mode}>
@@ -98,6 +106,8 @@ const Profile = () => {
 
         <button onClick={handleClick}>Log out</button>
       </Box>
+      <Moon mode={mode} onClick={handleMoon}><i class="fa-solid fa-moon"></i></Moon>
+      <Sun mode={mode} onClick = {handleSun}> <i class="fa-solid fa-sun"></i></Sun>
       <ActionBar />
     </>
   );
@@ -138,11 +148,11 @@ const Box = styled.div`
 `;
 
 const Info = styled.div`
-  background-color: white;
+  background-color: ${({mode}) => mode?"white":"#313131  "};
   width: 85vw;
   padding: 20px;
   border-radius: 30px;
-  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  box-shadow: ${({mode}) => mode?"rgba(149, 157, 165, 0.2) 0px 8px 24px":"rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset, rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px; "};
   line-height: 40px;
 `;
 
@@ -166,5 +176,26 @@ const Name = styled.form`
     padding-left: 20px;
   }
 `;
+
+const Moon = styled.button`
+position: fixed;
+color: ${({mode}) => mode?"black":"#DBDBDB  "};
+top: 10px;
+right: 10px;
+background-color: transparent;
+border: none;
+cursor: pointer;
+`
+
+const Sun = styled.button`
+position: fixed;
+color: ${({mode}) => mode?"black":"#DBDBDB   "};
+top: 10px;
+left: 10px;
+background-color: transparent;
+border: none;
+cursor: pointer;
+
+`
 
 export default Profile;

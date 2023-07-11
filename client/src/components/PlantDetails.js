@@ -9,7 +9,7 @@ import ActionBar from "./ActionBar";
 //Page that displays information about a plant,
 //also where you can Add it to your collection
 const PlantDetails = () => {
-  const { user } = useContext(UserContext);
+  const { user, mode } = useContext(UserContext);
   const params = useParams();
   const [plant, setPlant] = useState(null);
   const navigate = useNavigate();
@@ -75,11 +75,11 @@ const PlantDetails = () => {
   return (
     <>
       {plant && (
-        <Box>
+        <Box mode = {mode}>
           <h2>{capName(plant.common_name)}</h2>
           <img src={plant.default_image.original_url} />
           <p>{plant.scientific_name}</p>
-          <InfoBox>
+          <InfoBox mode = {mode}>
             <p>Cycle</p>
             <Cycle>{plant.cycle}</Cycle>
             <p>Watering</p>
@@ -104,18 +104,18 @@ const Box = styled.div`
   align-items: center;
   padding-bottom: 200px;
   h2 {
-    color: black;
+    color: ${({mode}) => mode?"black":"#E8E8E8"};
     margin: 20px 0px;
   }
   img {
-    width: 300px;
-    height: 300px;
+    width: 200px;
+    height: 200px;
     object-fit: cover;
     border-radius: 50%;
   }
 
   p {
-    color: black;
+    color: ${({mode}) => mode?"black":"#E8E8E8"};
     margin: 20px;
     font-style: italic;
   }
@@ -129,7 +129,8 @@ const Box = styled.div`
     position: fixed;
     top: 45vh;
     right: 0;
-    background-color: white;
+    background-color: ${({mode}) => mode?"white":"#121212"};
+
     color: #7c9b8f;
     border: none;
     font-weight: 500;

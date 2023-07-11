@@ -6,7 +6,7 @@ import { useContext } from "react";
 
 //Login page for user to enter info
 const Login = () => {
-  const { setUser } = useContext(UserContext);
+  const { setUser, mode } = useContext(UserContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
@@ -66,7 +66,7 @@ const Login = () => {
   };
 
   return (
-    <Box>
+    <Box mode = {mode}>
       <h1>BLOOM</h1>
 
       <i class="fa-solid fa-seedling"></i>
@@ -89,7 +89,7 @@ const Login = () => {
         ></input>
         <button type="submit">Login</button>
       </Info>
-      {error ? <Error>Invalid Email or Password</Error> : <></>}
+      {error ? <Error mode = {mode}>Invalid Email or Password</Error> : <></>}
 
       <p>
         First time on Plant-Care? -{" "}
@@ -177,10 +177,11 @@ const Info = styled.form`
 `;
 
 const Error = styled.div`
-  background-color: lightpink;
-  padding: 10px 20px;
+  background-color: ${({mode}) => mode?"lightpink":"transparent"};
+  padding: 10px 30px;
   margin-top: 40px;
-  border-radius: 30px;
+  
+  color: ${({mode}) => mode?"black":"#D6D6D6"};
 `;
 
 export default Login;

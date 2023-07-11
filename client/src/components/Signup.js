@@ -1,9 +1,12 @@
 import { styled } from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { UserContext } from "./UserContext";
+import { useContext } from "react";
 
 //Creation of a user and posting it on the db
 const Signup = () => {
+  const { setUser, mode } = useContext(UserContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -78,7 +81,7 @@ const Signup = () => {
   };
 
   return (
-    <Box>
+    <Box mode = {mode}>
       <h1>BLOOM</h1>
       <i class="fa-solid fa-seedling"></i>
       <Info onSubmit={handleSubmit}>
@@ -114,7 +117,7 @@ const Signup = () => {
       </Info>
       {/* error display for user  */}
       {passwordState ? (
-        <Error>Password and Confirm Password doesnt Match!</Error>
+        <Error mode = {mode}>Password and confirm-password doesnt Match!</Error>
       ) : (
         <></>
       )}
@@ -142,10 +145,10 @@ const Box = styled.div`
 
   i{
 
-    transform: translateY(-200%);
+    
     scale: 6;
 
-    transform: translateY(-100%);
+    transform: translateY(-85%);
   }
 
   input {
@@ -198,10 +201,13 @@ const Info = styled.form`
 `;
 
 const Error = styled.div`
-  background-color: lightpink;
-  padding: 10px 20px;
+background-color: ${({mode}) => mode?"lightpink":"transparent"};
+  padding: 10px 15px;
   margin-top: 40px;
-  border-radius: 20px;
+  color: ${({mode}) => mode?"black":"#D6D6D6"};
+  text-align: center;
+  font-size: 0.9em;
+  
 `;
 
 export default Signup;

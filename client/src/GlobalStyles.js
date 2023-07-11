@@ -17,8 +17,8 @@ export default createGlobalStyle`
 
   html, body {
     max-width: 100vw;
-    background-color:  #F8F8F8 ;
-    background-color: ${({mode}) => mode?"white":"#202020"} ;
+
+    background-color: ${({mode}) => mode?"#F8F8F8  ":"#202020"} ;
     
   }
 
