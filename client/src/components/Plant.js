@@ -8,7 +8,7 @@ import { keyframes, css } from "styled-components";
 //individual plants in the garden displayed with
 //the buttons and batery level displayed
 const Plant = ({ plant, garden, setGarden, empty, setEmpty }) => {
-  const { user } = useContext(UserContext);
+  const { user, mode } = useContext(UserContext);
   const [waterTime, setWaterTime] = useState(Date.now()); //initial date
   const [danger, setDanger] = useState(false);
   const [percent, setPercent] = useState(100);
@@ -107,7 +107,7 @@ const Plant = ({ plant, garden, setGarden, empty, setEmpty }) => {
   };
 
   return (
-    <Box>
+    <Box mode={mode}>
       <h3>{capName(plant.name)}</h3>
       <Main danger={danger}>
         <i
@@ -175,13 +175,16 @@ const Box = styled.div`
   justify-content: center;
   flex-direction: column;
   margin: 20px;
-  background-color: white;
+  
   border-radius: 30px;
   padding: 30px 10px;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  box-shadow: ${({mode}) => mode?"rgba(100, 100, 111, 0.2) 0px 7px 29px 0px":"box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;"};
+  background-color: ${({mode}) => mode?"white":"#313131  "};
+  
 
   h3 {
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     font-weight: 500;
   }
   p {

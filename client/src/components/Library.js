@@ -139,6 +139,7 @@ const List = styled.ul`
 `;
 
 const ListItem = styled.li`
+  cursor: pointer;
   background-color: white;
   border: 1px solid grey;
   padding: 20px;

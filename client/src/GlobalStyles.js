@@ -18,6 +18,7 @@ export default createGlobalStyle`
   html, body {
     max-width: 100vw;
     background-color:  #F8F8F8 ;
+    background-color: ${({mode}) => mode?"white":"#202020"} ;
     
   }
 
@@ -55,5 +56,9 @@ export default createGlobalStyle`
   q:before, q:after {
     content: '';
     content: none;
+  }
+
+  p, li, span, div{
+    color: ${({mode}) => mode?"black":"white"} ;
   }
 `;

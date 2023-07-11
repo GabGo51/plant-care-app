@@ -121,6 +121,7 @@ const Box = styled.div`
   }
 
   button {
+    cursor: pointer;
     width: 70px;
     height: 50px;
     border-radius: 30px 0 0 30px;

@@ -135,7 +135,7 @@ const Box = styled.div`
   }
 
   p {
-    color: black;
+    
     position: absolute;
     bottom: 125px;
     width: 370px;

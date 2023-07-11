@@ -6,6 +6,7 @@ import { useState } from "react";
 export const UserContext = createContext(null);
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [mode ,setMode] = useState(true)
   console.log(user);
   useEffect(()=>{
 
@@ -40,7 +41,7 @@ export const UserProvider = ({ children }) => {
   },[])
 
   return (
-    <UserContext.Provider value={{ user, setUser }}>
+    <UserContext.Provider value={{ user, setUser, mode, setMode }}>
       {children}
     </UserContext.Provider>
   );

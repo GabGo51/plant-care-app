@@ -8,7 +8,7 @@ import ActionBar from "./ActionBar";
 
 //Page to display information about the user
 const Profile = () => {
-  const { user, setUser } = useContext(UserContext);
+  const { user, setUser, mode } = useContext(UserContext);
   const [name, setName] = useState(null);
   const [garden, setGarden] = useState(null);
 
@@ -72,16 +72,16 @@ const Profile = () => {
   };
   return (
     <>
-      <Box>
+      <Box mode={mode}>
         <h1>Profile</h1>
         {user && (
-          <Info>
+          <Info mode={mode}>
             {user.name ? (
-              <Name>
+              <Name mode={mode}>
                 <>{user.name}</>
               </Name>
             ) : (
-              <Name onSubmit={handleName}>
+              <Name mode={mode} onSubmit={handleName}>
                 <input onChange={handleChange} />
                 <button type="submit">Add Name</button>
               </Name>

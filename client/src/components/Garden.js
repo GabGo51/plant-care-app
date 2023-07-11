@@ -14,16 +14,17 @@ import { keyframes, css } from "styled-components";
 //Display of the user plant collection,
 //where he can delete and water the plant in his collection
 const Garden = () => {
-  const { user } = useContext(UserContext);
+  const { user, mode, setMode } = useContext(UserContext);
   const params = useParams();
   const [garden, setGarden] = useState(null);
   const [empty, setEmpty] = useState(false)
+  console.log(mode);
 
   const navigate = useNavigate();
   if (!user) {
     navigate("/");
   }
-  console.log(empty);
+  
 
   //Fetching the individual garden
   useEffect(() => {
@@ -43,13 +44,20 @@ const Garden = () => {
       });
   }, [setGarden]);
 
+  const handleMoon = () =>{
+    setMode(false)
+  }
+  const handleSun = () =>{
+    setMode(true)
+  }
+
   
 
 
 
   return (
     <>
-      <Box empty = {empty}>
+      <Box mode={mode} empty = {empty}>
         <h1>Garden</h1>
 
         {garden && (
@@ -64,6 +72,7 @@ const Garden = () => {
                   setGarden={setGarden}
                   empty = {empty}
                   setEmpty={setEmpty}
+                  mode ={mode }
                 />
               );
             })}
@@ -73,12 +82,15 @@ const Garden = () => {
           <p>Your Garden is empty!</p>
           <p>Add a plant </p>
           
-          <i class="fa-solid fa-plant-wilt"></i>
+          <i class="fa-brands fa-pagelines"></i>
           </Empty>
         )}
         {/* to go acces library */}
-        <button empty = {empty} onClick={() => navigate("/library")}>Add Plant</button>
+        <button mode = {mode} empty = {empty} onClick={() => navigate("/library")}>Add Plant</button>
+        
       </Box>
+      <Moon mode={mode} onClick={handleMoon}><i class="fa-solid fa-moon"></i></Moon>
+      <Sun mode={mode} onClick = {handleSun}> <i class="fa-solid fa-sun"></i></Sun>
       <ActionBar />
     </>
   );
@@ -119,12 +131,13 @@ const Box = styled.div`
     position: fixed;
     top: 45vh;
     right: 0;
-    background-color: white;
-    color: #7c9b8f;
+    color: ${({mode}) => mode?"#7c9b8f":"#7c9b8f"} ;
+    background-color: ${({mode}) => mode?"white":"#121212"} ;
     border: none;
     font-weight: 500;
     transition: 300ms;
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    box-shadow:${({mode}) => mode?"rgba(100, 100, 111, 0.2) 0px 7px 29px 0px":" rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;"} ;
+    cursor: pointer;
     &:hover {
       scale: 1.1;
     }
@@ -166,11 +179,32 @@ line-height: 45px;
   margin-top: 45px;
 }
 
-.fa-plant-wilt{
+.fa-pagelines{
 
   margin-top: 140px;
   scale: 3;
 }
+`
+
+const Moon = styled.button`
+position: fixed;
+color: ${({mode}) => mode?"black":"#DBDBDB  "};
+top: 10px;
+right: 10px;
+background-color: transparent;
+border: none;
+cursor: pointer;
+`
+
+const Sun = styled.button`
+position: fixed;
+color: ${({mode}) => mode?"black":"#DBDBDB   "};
+top: 10px;
+left: 10px;
+background-color: transparent;
+border: none;
+cursor: pointer;
+
 `
 
 export default Garden;

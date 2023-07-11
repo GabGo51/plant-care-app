@@ -7,7 +7,7 @@ import { NavLink } from "react-router-dom";
 
 //Navigation from Garden to User using this component as a navBar
 const ActionBar = () => {
-  const { user } = useContext(UserContext);
+  const { user, mode } = useContext(UserContext);
   const navigate = useNavigate();
 
   if (!user) {
@@ -16,12 +16,12 @@ const ActionBar = () => {
   return (
     <>
       {user && (
-        <Container>
-          <ButtonPlant to={`/garden/${user.gardenId}`} activeClassName="active">
+        <Container mode = {mode}>
+          <ButtonPlant mode ={mode} to={`/garden/${user.gardenId}`} activeClassName="active">
             <p>Garden</p>
             <i className="fa-solid fa-seedling plant"></i>
           </ButtonPlant>
-          <ButtonProfile to="/user" activeClassName="active">
+          <ButtonProfile mode = {mode} to="/user" activeClassName="active">
             <i className="fa-solid fa-user profile"></i>
             <p>Profile</p>
           </ButtonProfile>
@@ -46,7 +46,7 @@ const ButtonPlant = styled(NavLink)`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: white;
+  background-color: ${({mode}) => mode?"white":"#121212   "};
   width: 100%;
   border: none;
   padding: 30px;
@@ -60,14 +60,18 @@ const ButtonPlant = styled(NavLink)`
   }
 
   p {
-    font-weight: bold;
+    font-weight: 500;
     font-size: 1.1em;
     margin-right: 20px;
+    color: ${({mode}) => mode?"#7c9b8f":"#7c9b8f"};
   }
 
   &.active {
-    border: 2px solid #2fd896;
+    border: 1.5px solid #2fd896;
     color: #2fd896;
+    p{
+      color: #2fd896;
+    }
   }
 
   &:hover {
@@ -79,11 +83,11 @@ const ButtonPlant = styled(NavLink)`
 
 const ButtonProfile = styled(NavLink)`
   text-decoration: none;
-  color: #7c9b8f;
+  color: ${({mode}) => mode?"#7c9b8f":"#7c9b8f"};
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: white;
+  background-color: ${({mode}) => mode?"white":"#121212   "};
   width: 100%;
   border: none;
   padding: 30px;
@@ -97,14 +101,19 @@ const ButtonProfile = styled(NavLink)`
   }
 
   p {
-    font-weight: bold;
+    font-weight: 500;
     font-size: 1.1em;
     margin-left: 20px;
+    color: ${({mode}) => mode?"#7c9b8f":"#7c9b8f"};
   }
 
   &.active {
-    border: 2px solid #2fd896;
+    border: 1.5px solid #2fd896;
     color: #2fd896;
+    p{
+      color: #2fd896;
+    }
+    
   }
   &:hover {
     i {

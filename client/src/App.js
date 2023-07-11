@@ -8,11 +8,17 @@ import Library from "./components/Library";
 import PlantDetails from "./components/PlantDetails";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
+import GlobalStyles from "./GlobalStyles";
+import { UserContext } from "./components/UserContext";
+import { useContext } from "react";
 
 //all Paths
 function App() {
+  const { mode, setMode } = useContext(UserContext);
+  
   return (
     <Router>
+      <GlobalStyles mode = {mode} />
       <Container>
         <Routes>
           <Route path="/" element={<Login />} />
