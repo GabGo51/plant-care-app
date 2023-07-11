@@ -10,6 +10,7 @@ import { useContext } from "react";
 import { useParams } from "react-router-dom";
 import ActionBar from "./ActionBar";
 import { keyframes, css } from "styled-components";
+import PlantLogo from"../Img/plant.png"
 
 //Display of the user plant collection,
 //where he can delete and water the plant in his collection
@@ -73,11 +74,12 @@ const Garden = () => {
             })}
           </Content>
           :
-          <Empty>
+          <Empty mode = {mode}>
           <p>Your Garden is empty</p>
           
           
-          <i class="fa-brands fa-pagelines"></i>
+          
+          <img mode = {mode} src = {PlantLogo}/>
           </Empty>
         )}
         {/* to go acces library */}
@@ -171,6 +173,13 @@ line-height: 45px;
 
   margin-top: 140px;
   scale: 3;
+}
+
+img{
+  width: 200px;
+  margin-top: 50px;
+  filter: ${({mode}) => mode ? "brightness(100%)" : "invert(90%)"};
+
 }
 `
 
