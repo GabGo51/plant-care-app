@@ -1,8 +1,9 @@
-import { styled } from "styled-components";
+import { styled, keyframes } from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { UserContext } from "./UserContext";
 import { useContext } from "react";
+import PlantLogo from"../Img/plant.png"
 
 //Creation of a user and posting it on the db
 const Signup = () => {
@@ -11,6 +12,7 @@ const Signup = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [passwordState, setPasswordState] = useState(false);
+  const [emailState, setEmailState] = useState(false);
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -38,7 +40,7 @@ const Signup = () => {
   //Make sure P and CP are the same before posting 
   const handleSignup = () => {
     if (password !== confirmPassword) {
-      setPasswordState(true);
+      passwordError()
     } else {
       setPasswordState(false);
     }
@@ -63,13 +65,18 @@ const Signup = () => {
       })
         .then((response) => response.json())
         .then((data) => {
+          if(data.status === 409){
+            emailError()
+            throw new Error(data.message);
+          }else
           if (
             data.status === 400 ||
-            data.status === 500 ||
-            data.status === 409
+            data.status === 500
+            
           ) {
             throw new Error(data.message);
           } else {
+            setEmailState(false)
             console.log("Added to Database!");
             navigate("/");
           }
@@ -79,11 +86,24 @@ const Signup = () => {
         });
     }
   };
+  //removes error after 2 seconds
+  const emailError = () =>{
+    setEmailState(true)
+    setTimeout(()=>{
+      setEmailState(false)
+    }, 3000)
+  }
+  const passwordError = () =>{
+    setPasswordState(true)
+    setTimeout(()=>{
+      setPasswordState(false)
+    }, 3000)
+  }
 
   return (
     <Box mode = {mode}>
       <h1>BLOOM</h1>
-      <i class="fa-solid fa-seedling"></i>
+      <PlantImage mode = {mode} src={PlantLogo}/>
       <Info onSubmit={handleSubmit}>
         <input
           name="email"
@@ -116,6 +136,7 @@ const Signup = () => {
         </button>
       </Info>
       {/* error display for user  */}
+      {emailState&&<Error mode = {mode} >Email already used</Error>}
       {passwordState ? (
         <Error mode = {mode}>Password and confirm-password doesnt Match!</Error>
       ) : (
@@ -166,7 +187,7 @@ const Box = styled.div`
   p {
     color: balck;
     position: absolute;
-    bottom: 125px;
+    bottom: 60px;
     
     span {
       color: lightblue;
@@ -192,12 +213,25 @@ const Box = styled.div`
     }
   }
 `;
+const PlantImage = styled.img`
+width: 200px;
+  margin-top: 50px;
+  filter: ${({mode}) => mode ? "brightness(100%)" : "invert(90%)"};
+  
+  object-fit: cover;
+`
 
 const Info = styled.form`
   display: flex;
   flex-direction: column;
 
   align-items: center;
+`;
+const fadeInOutAnimation = keyframes`
+  0% { opacity: 0; }
+  30% { opacity: 1; }
+  80%{opacity:1;}
+  100% { opacity: 0; }
 `;
 
 const Error = styled.div`
@@ -207,6 +241,8 @@ background-color: ${({mode}) => mode?"lightpink":"transparent"};
   color: ${({mode}) => mode?"black":"#D6D6D6"};
   text-align: center;
   font-size: 0.9em;
+  margin-bottom: 50px;
+  animation: ${fadeInOutAnimation} 3s forwards;
   
 `;
 

@@ -1,8 +1,9 @@
-import { styled } from "styled-components";
+import { styled, keyframes } from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { UserContext } from "./UserContext";
 import { useContext } from "react";
+import PlantLogo from"../Img/plant.png"
 
 //Login page for user to enter info
 const Login = () => {
@@ -50,7 +51,7 @@ const Login = () => {
       .then((response) => response.json())
       .then((data) => {
         if (data.status === 400 || data.status === 500 || data.status === 409) {
-          setError(true);
+          errorLogin();
           throw new Error(data.message);
         } else {
           setUser(data.user);
@@ -65,11 +66,18 @@ const Login = () => {
       });
   };
 
+  const errorLogin = () =>{
+    setError(true)
+    setTimeout(()=>{
+      setError(false)
+    }, 3000)
+  }
+
   return (
     <Box mode = {mode}>
       <h1>BLOOM</h1>
 
-      <i class="fa-solid fa-seedling"></i>
+      <PlantImage mode = {mode} src={PlantLogo}/>
       <Info onSubmit={handleSubmit}>
         <input
           name="email"
@@ -127,7 +135,7 @@ const Box = styled.div`
     outline: none;
     border: none;
     margin: 20px;
-    width: 300px;
+    width: 320px;
     padding: 10px;
     border-radius: 30px;
     padding-left: 30px;
@@ -137,7 +145,7 @@ const Box = styled.div`
   p {
     
     position: absolute;
-    bottom: 125px;
+    bottom: 60px;
     width: 370px;
     span {
       color: lightblue;
@@ -168,6 +176,13 @@ const Box = styled.div`
     }
   }
 `;
+const PlantImage = styled.img`
+width: 200px;
+  margin-top: 50px;
+  filter: ${({mode}) => mode ? "brightness(100%)" : "invert(90%)"};
+  transform: translateY(-30%);
+  object-fit: cover;
+`
 
 const Info = styled.form`
   display: flex;
@@ -176,11 +191,18 @@ const Info = styled.form`
   align-items: center;
 `;
 
+const fadeInOutAnimation = keyframes`
+  0% { opacity: 0; }
+  30% { opacity: 1; }
+  80%{opacity:1;}
+  100% { opacity: 0; }
+`;
+
 const Error = styled.div`
   background-color: ${({mode}) => mode?"lightpink":"transparent"};
   padding: 10px 30px;
   margin-top: 40px;
-  
+  animation: ${fadeInOutAnimation} 3s forwards;
   color: ${({mode}) => mode?"black":"#D6D6D6"};
 `;
 

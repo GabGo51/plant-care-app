@@ -5,6 +5,7 @@ import { useContext } from "react";
 import { UserContext } from "./UserContext";
 import { useEffect } from "react";
 import ActionBar from "./ActionBar";
+import PlantLogo from"../Img/plant.png"
 
 //Page to display information about the user
 const Profile = () => {
@@ -82,6 +83,7 @@ const Profile = () => {
     <>
       <Box mode={mode}>
         <h1>BLOOM</h1>
+        
         {user && (
           <Info mode={mode}>
             {user.name ? (
@@ -103,6 +105,11 @@ const Profile = () => {
             <div>Joined Plant on: {user.time}</div>
           </Info>
         )}
+        <LogoContainer>
+          <PlantImage mode = {mode} src= {PlantLogo}/>
+          <Bye>Bye</Bye>
+        </LogoContainer>
+        
 
         <button onClick={handleClick}>Log out</button>
       </Box>
@@ -120,7 +127,7 @@ const Box = styled.div`
 
   h1 {
     font-weight: 500;
-    margin-bottom: 200px;
+    margin-bottom: 30px;
     text-align: center;
     margin-top: 20px;
   }
@@ -196,6 +203,22 @@ background-color: transparent;
 border: none;
 cursor: pointer;
 
+`
+const PlantImage = styled.img`
+width: 200px;
+  margin-top: 50px;
+  filter: ${({mode}) => mode ? "brightness(100%)" : "invert(90%)"};
+  object-fit: cover;
+`
+const LogoContainer = styled.div`
+position: relative;
+`
+
+const Bye = styled.p`
+font-family: Cherry Bomb One;
+position: absolute;
+top: 185px;
+right: 5px;
 `
 
 export default Profile;
