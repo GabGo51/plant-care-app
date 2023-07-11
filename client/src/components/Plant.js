@@ -7,7 +7,7 @@ import { keyframes, css } from "styled-components";
 
 //individual plants in the garden displayed with
 //the buttons and batery level displayed
-const Plant = ({ plant, garden, setGarden }) => {
+const Plant = ({ plant, garden, setGarden, empty, setEmpty }) => {
   const { user } = useContext(UserContext);
   const [waterTime, setWaterTime] = useState(Date.now()); //initial date
   const [danger, setDanger] = useState(false);
@@ -54,6 +54,9 @@ const Plant = ({ plant, garden, setGarden }) => {
             (plant) => plant.uniqueId !== plantId
           );
           setGarden(updatedGarden);
+          if(garden.length - 1 === 0){
+            setEmpty(true)
+          }
         } else {
           throw new Error("Error deleting plant from collection");
         }
