@@ -112,6 +112,7 @@ const Signup = () => {
           Sign Up
         </button>
       </Info>
+      {/* error display for user  */}
       {passwordState ? (
         <Error>Password and Confirm Password doesnt Match!</Error>
       ) : (

@@ -6,7 +6,8 @@ import { useNavigate } from "react-router-dom";
 import { UserContext } from "./UserContext";
 import { useContext } from "react";
 import ActionBar from "./ActionBar";
-//Page that displays information about a plant, also where you can Add it to your collection
+//Page that displays information about a plant,
+//also where you can Add it to your collection
 const PlantDetails = () => {
   const { user } = useContext(UserContext);
   const params = useParams();
@@ -22,20 +23,16 @@ const PlantDetails = () => {
           throw new Error("Failed to fetch plant data");
         }
         const plantData = await response.json();
-        
         setPlant(plantData.plant);
       } catch (error) {
         console.error(error);
-        // Handle error state or display an error message
       }
     };
     fetchPlantData();
   }, [params.plantId]);
 
-  
   //Adding a plant to your collection
   const handleClick = () => {
-    
     fetch("/api/add-plant", {
       method: "POST",
       headers: {
@@ -44,11 +41,11 @@ const PlantDetails = () => {
       },
       body: JSON.stringify({
         id: plant.id,
-        uniqueId: Math.floor(Math.random()*100000),
+        uniqueId: Math.floor(Math.random() * 100000),
         name: plant.common_name,
         water: plant.watering,
         image: plant.default_image.original_url,
-        gardenId:user.gardenId,
+        gardenId: user.gardenId,
       }),
     })
       .then((response) => response.json())
@@ -64,14 +61,22 @@ const PlantDetails = () => {
         console.error(error);
       });
   };
+  //first letter of each word cap
+  const capName = (plantName) => {
+    const words = plantName.split(" ");
+    const capitalizedWords = words.map(function (word) {
+      return word.charAt(0).toUpperCase() + word.slice(1);
+    });
+    const name = capitalizedWords.join(" ");
+
+    return name;
+  };
+
   return (
     <>
       {plant && (
         <Box>
-          <h2>
-            {plant.common_name.charAt(0).toUpperCase() +
-              plant.common_name.slice(1)}
-          </h2>
+          <h2>{capName(plant.common_name)}</h2>
           <img src={plant.default_image.original_url} />
           <p>{plant.scientific_name}</p>
           <InfoBox>
@@ -85,7 +90,7 @@ const PlantDetails = () => {
                 plant.sunlight[0].slice(1)}
             </Sunlight>
           </InfoBox>
-          <button onClick={handleClick}>Add to Garden</button>
+          <button onClick={handleClick}>Add</button>
         </Box>
       )}
       <ActionBar />
@@ -115,14 +120,23 @@ const Box = styled.div`
     font-style: italic;
   }
 
-  button{
-    background-color: transparent;
-    cursor: pointer;
-    color: black;
-    border: 2px solid black;
-    margin-top: 20px;
-    padding: 10px 20px;
-    border-radius: 30px;
+  button {
+    width: 70px;
+    height: 50px;
+    border-radius: 30px 0 0 30px;
+    font-size: 1em;
+    position: fixed;
+    top: 45vh;
+    right: 0;
+    background-color: white;
+    color: #7c9b8f;
+    border: none;
+    font-weight: 500;
+    transition: 300ms;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    &:hover {
+      scale: 1.1;
+    }
   }
 `;
 

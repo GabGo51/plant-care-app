@@ -4,10 +4,9 @@ import { useState } from "react";
 import { UserContext } from "./UserContext";
 import { useContext } from "react";
 
-//Login page for user to enter info 
+//Login page for user to enter info
 const Login = () => {
-
-  const {setUser} = useContext(UserContext);
+  const { setUser } = useContext(UserContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
@@ -44,23 +43,21 @@ const Login = () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        email: email.toLowerCase(), //make sure its not case sensitiv for email 
-        password
+        email: email.toLowerCase(), //make sure its not case sensitiv for email
+        password,
       }),
     })
       .then((response) => response.json())
       .then((data) => {
         if (data.status === 400 || data.status === 500 || data.status === 409) {
-          setError(true)
+          setError(true);
           throw new Error(data.message);
-          
         } else {
           setUser(data.user);
-          window.localStorage.setItem("email", data.user.email)
-          setError(false)
+          window.localStorage.setItem("email", data.user.email);
+          setError(false);
           console.log("User Found!");
           navigate(`/Garden/${data.user.gardenId}`);
-          
         }
       })
       .catch((error) => {
@@ -116,13 +113,11 @@ const Box = styled.div`
     font-weight: 500;
   }
 
-  i{
-
+  i {
     transform: translateY(-200%);
     scale: 6;
 
     @media screen and (max-width: 400px) {
-  
       transform: translateY(-100%);
     }
   }
@@ -150,12 +145,9 @@ const Box = styled.div`
     }
 
     @media screen and (max-width: 400px) {
-  
       width: 250px;
       text-align: center;
     }
-
-
   }
 
   button {

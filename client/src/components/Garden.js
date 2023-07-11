@@ -1,3 +1,5 @@
+///shit to do : make something for when garden Empty, make plant image link to plant detail page
+
 import React from "react";
 import Plant from "./Plant";
 import styled from "styled-components";
@@ -6,17 +8,18 @@ import { useState, useEffect } from "react";
 import { UserContext } from "./UserContext";
 import { useContext } from "react";
 import { useParams } from "react-router-dom";
-
 import ActionBar from "./ActionBar";
-//Display of the user plant collection, where he can delete and water the plant in his collection
+
+//Display of the user plant collection,
+//where he can delete and water the plant in his collection
 const Garden = () => {
   const { user } = useContext(UserContext);
-  const params = useParams()
+  const params = useParams();
   const [garden, setGarden] = useState(null);
-  
+
   const navigate = useNavigate();
-  if(!user || !garden){
-    navigate("/")
+  if (!user) {
+    navigate("/");
   }
 
   //Fetching the individual garden
@@ -31,29 +34,30 @@ const Garden = () => {
       });
   }, [setGarden]);
 
-  
-  
-
   return (
     <>
       <Box>
         <h1>Garden</h1>
+
         {garden && (
           <Content>
             {garden.map((plant) => {
-              
               return (
-                <Plant key={plant.uniqueId} plant={plant} garden={garden} setGarden={setGarden}/>
+                <Plant
+                  key={plant.uniqueId}
+                  plant={plant}
+                  garden={garden}
+                  setGarden={setGarden}
+                />
               );
             })}
           </Content>
         )}
-
+        {/* to go acces library */}
         <button onClick={() => navigate("/library")}>Add Plant</button>
       </Box>
       <ActionBar />
     </>
-    
   );
 };
 
@@ -63,7 +67,6 @@ const Box = styled.div`
   flex-direction: column;
   align-items: center;
   padding-bottom: 200px;
-  
 
   button {
     width: 100px;
@@ -74,7 +77,7 @@ const Box = styled.div`
     top: 45vh;
     right: 0;
     background-color: white;
-    color: #7C9B8F;
+    color: #7c9b8f;
     border: none;
     font-weight: 500;
     transition: 300ms;
@@ -90,10 +93,9 @@ const Box = styled.div`
     object-fit: cover;
     border-radius: 50%;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-    
   }
 
-  h1{
+  h1 {
     margin: 20px 0px;
     font-weight: 500;
   }
@@ -105,9 +107,5 @@ const Content = styled.section`
   align-items: center;
   justify-content: center;
 `;
-
-
-
-
 
 export default Garden;

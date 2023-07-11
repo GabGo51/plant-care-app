@@ -8,7 +8,6 @@ const Library = () => {
   const [allPlants, setAllPlants] = useState([]);
   const [value, setValue] = useState("");
   const navigate = useNavigate();
-  
 
   // Get matching plants from the SB value and the database
   const matchedPlants = allPlants.filter((plant) => {
@@ -31,7 +30,7 @@ const Library = () => {
         console.log(error);
       });
   }, []);
-
+  //input state
   const handleChange = (event) => {
     setValue(event.target.value);
   };
@@ -49,10 +48,14 @@ const Library = () => {
           />
         </InputBox>
         <p>
-          Search for<span>your plant </span><span><i class="fa-solid fa-leaf"></i> </span>
+          Search for<span>your plant </span>
+          <span>
+            <i class="fa-solid fa-leaf"></i>{" "}
+          </span>
         </p>
 
         <List>
+          {/* mapping over limit and not all suggestion */}
           {limit.map((plant) => {
             const index = plant.common_name
               .toLowerCase()

@@ -5,17 +5,19 @@ import { useContext } from "react";
 import { useState } from "react";
 import { keyframes, css } from "styled-components";
 
+//individual plants in the garden displayed with
+//the buttons and batery level displayed
 const Plant = ({ plant, garden, setGarden }) => {
   const { user } = useContext(UserContext);
   const [waterTime, setWaterTime] = useState(Date.now()); //initial date
   const [danger, setDanger] = useState(false);
   const [percent, setPercent] = useState(100);
-  
-  
+
   const percentage = Math.floor(
     ((plant.waterTime - waterTime) / plant.timer) * 100
   );
 
+  //setting danger based on percent
   useEffect(() => {
     if (plant.waterTime - waterTime < 0) {
       setWaterTime(0);
@@ -32,10 +34,7 @@ const Plant = ({ plant, garden, setGarden }) => {
     }
   }, []);
 
-  //dummy state here
-
-  console.log(percent);
-
+  //delete function to remove a plant from garden
   const handleDelete = (plantId) => {
     fetch(`/api/delete-plant/${plantId}`, {
       method: "DELETE",
@@ -64,6 +63,7 @@ const Plant = ({ plant, garden, setGarden }) => {
       });
   };
 
+  //water function to reset the water timer on a specific plant
   const handleWater = (plantId) => {
     fetch(`/api/water-plant/${plantId}`, {
       method: "PATCH",
@@ -79,10 +79,10 @@ const Plant = ({ plant, garden, setGarden }) => {
       .then((response) => {
         if (response.ok) {
           // Update the collection and reset the garden to that collection
-          
+
           console.log("hello");
           setPercent(100);
-          setDanger(false)
+          setDanger(false);
         } else {
           throw new Error("Error deleting plant from collection");
         }
@@ -92,17 +92,20 @@ const Plant = ({ plant, garden, setGarden }) => {
       });
   };
 
-  const words = plant.name.split(" ");
-  const capitalizedWords = words.map(function(word) {
-    return word.charAt(0).toUpperCase() + word.slice(1);
-  });
-  const capName = capitalizedWords.join(" ");
+  //make first letter each word cap
+  const capName = (plantName) => {
+    const words = plantName.split(" ");
+    const capitalizedWords = words.map(function (word) {
+      return word.charAt(0).toUpperCase() + word.slice(1);
+    });
+    const name = capitalizedWords.join(" ");
 
-  
+    return name;
+  };
 
   return (
     <Box>
-      <h3>{capName}</h3>
+      <h3>{capName(plant.name)}</h3>
       <Main danger={danger}>
         <i
           className="fa-solid fa-droplet blue"
@@ -114,6 +117,7 @@ const Plant = ({ plant, garden, setGarden }) => {
           onClick={() => handleDelete(plant.uniqueId)}
         ></i>
       </Main>
+      {/* battery level display and changing icon depending on percent */}
       {percent > 80 && (
         <Battery>
           <i className="fa-solid fa-battery-full green"></i>
@@ -148,6 +152,7 @@ const Plant = ({ plant, garden, setGarden }) => {
   );
 };
 
+//animation for danger state
 const bounceAnimation = keyframes`
   0% {
     transform: scale(1);
