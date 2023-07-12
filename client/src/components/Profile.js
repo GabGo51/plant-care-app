@@ -105,13 +105,14 @@ const Profile = () => {
             <div>Joined Plant on: {user.time}</div>
           </Info>
         )}
+        <button onClick={handleClick}>Log out</button>
         <LogoContainer>
           <PlantImage mode = {mode} src= {PlantLogo}/>
-          <Bye>Bye</Bye>
+          <Bye>Bye!</Bye>
         </LogoContainer>
         
 
-        <button onClick={handleClick}>Log out</button>
+        
       </Box>
       <Moon mode={mode} onClick={handleMoon}><i class="fa-solid fa-moon"></i></Moon>
       <Sun mode={mode} onClick = {handleSun}> <i class="fa-solid fa-sun"></i></Sun>
@@ -219,6 +220,7 @@ font-family: Cherry Bomb One;
 position: absolute;
 top: 185px;
 right: 5px;
+transform: rotate(-20deg);
 `
 
 export default Profile;

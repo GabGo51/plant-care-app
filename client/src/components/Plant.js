@@ -17,6 +17,7 @@ const Plant = ({ plant, garden, setGarden, empty, setEmpty }) => {
   const percentage = Math.floor(
     ((plant.waterTime - waterTime) / plant.timer) * 100
   );
+  console.log(danger);
 
   //setting danger based on percent
   useEffect(() => {
@@ -117,7 +118,7 @@ const Plant = ({ plant, garden, setGarden, empty, setEmpty }) => {
           className="fa-solid fa-droplet blue"
           onClick={() => handleWater(plant.uniqueId)}
         ></i>
-        <PlantImg src={plant.image} />
+        <PlantImg  src={plant.image} danger = {danger} />
         <i
           className="fa-regular fa-trash-can red"
           onClick={() => handleDelete(plant.uniqueId)}
@@ -264,11 +265,14 @@ const PlantImg = styled.img`
     border-radius: 50%;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     transform: scaleX(-1);
+    background-color: ${({mode}) => mode?"white":"#313131  "};
     ${({ danger }) =>
-      danger &&
-      css`
-        animation: ${bounceAnimation} 1s infinite;
-      `}
+    danger &&
+    css`
+      animation: ${bounceAnimation} 1.5s infinite;
+    `};
+    
+    
 `
 
 export default Plant;

@@ -79,7 +79,10 @@ const Garden = () => {
           
           
           
-          <img mode = {mode} src = {PlantLogo}/>
+          <LogoContainer>
+            <PlantImage mode = {mode} src= {PlantLogo}/>
+            <Bye>Hi!</Bye>
+          </LogoContainer>
           </Empty>
         )}
         {/* to go acces library */}
@@ -175,12 +178,25 @@ line-height: 45px;
   scale: 3;
 }
 
-img{
-  width: 200px;
+
+`
+const PlantImage = styled.img`
+width: 200px;
   margin-top: 50px;
   filter: ${({mode}) => mode ? "brightness(100%)" : "invert(90%)"};
+  object-fit: cover;
+`
+const LogoContainer = styled.div`
+position: relative;
+`
 
-}
+const Bye = styled.p`
+font-family: Cherry Bomb One;
+position: absolute;
+scale: 0.7;
+top: 170px;
+right: 5px;
+transform: rotate(-20deg);
 `
 
 export default Garden;
