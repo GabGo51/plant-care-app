@@ -47,6 +47,7 @@ express()
   .use("/", express.static(__dirname + "/"))
 
   // END POINT.
+  .get('/hello', (_, res) => res.send('Hello from BLOOM')) 
 
 
   
