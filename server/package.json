@@ -19,6 +19,6 @@
   },
   "scripts": {
     "start": "nodemon index.js",
-    "build": "esbuild server.js --bundle --minify --outfile=dist/bundle.js"
+    "build": "esbuild server.js --bundle --platform=node --target=node14 --outfile=dist/bundle.js --external:mock-aws-s3 --external:aws-sdk --external:nock"
   }
 }
