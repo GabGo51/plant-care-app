@@ -29,7 +29,7 @@ const Garden = () => {
 
   //Fetching the individual garden
   useEffect(() => {
-    fetch(`/api/garden/${params.gardenId}`)
+    fetch(`https://plant-care-app.onrender.com/api/garden/${params.gardenId}`)
       .then((response) => response.json())
       .then((parse) => {
         setGarden(parse.data);

@@ -15,7 +15,7 @@ export const UserProvider = ({ children }) => {
    
 
       if(email){
-      fetch("/api/signinemail", {
+      fetch("https://plant-care-app.onrender.com/api/signinemail", {
         method: "POST",
         headers: {
           Accept: "application/json",

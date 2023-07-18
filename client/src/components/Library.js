@@ -24,7 +24,7 @@ const Library = () => {
 
   //Fetching all the plants from the db
   useEffect(() => {
-    fetch(`/api/get-plants`)
+    fetch(`https://plant-care-app.onrender.com/api/get-plants`)
       .then((response) => response.json())
       .then((parse) => {
         setAllPlants(parse.plants);

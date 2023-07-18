@@ -20,7 +20,7 @@ const Profile = () => {
   //fetching garden for length displaying number of plants 
   useEffect(() => {
     user &&
-      fetch(`/api/garden/${user.gardenId}`)
+      fetch(`https://plant-care-app.onrender.com/api/garden/${user.gardenId}`)
         .then((response) => response.json())
         .then((parse) => {
           console.log(parse.data);
@@ -45,7 +45,7 @@ const Profile = () => {
   const handleName = (event, userId) => {
     event.preventDefault();
 
-    fetch(`/api/add-name/${userId}`, {
+    fetch(`https://plant-care-app.onrender.com/api/add-name/${userId}`, {
       method: "PATCH",
       headers: {
         Accept: "application/json",
