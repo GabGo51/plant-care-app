@@ -102,7 +102,7 @@ const Profile = () => {
             <div>
               Number of plants in Garden: <span>{garden}</span>
             </div>
-            <div>Joined Plant on: {user.time}</div>
+            <div>Joined BLOOM on: {user.time}</div>
           </Info>
         )}
         <button onClick={handleClick}>Log out</button>
@@ -114,8 +114,8 @@ const Profile = () => {
 
         
       </Box>
-      <Moon mode={mode} onClick={handleMoon}><i class="fa-solid fa-moon"></i></Moon>
-      <Sun mode={mode} onClick = {handleSun}> <i class="fa-solid fa-sun"></i></Sun>
+      <Moon mode={mode} onClick={handleMoon}><i className="fa-solid fa-moon"></i></Moon>
+      <Sun mode={mode} onClick = {handleSun}> <i className="fa-solid fa-sun"></i></Sun>
       <ActionBar />
     </>
   );

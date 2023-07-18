@@ -38,7 +38,9 @@ express()
   // END POINT.
 
 
-  .post("/api/signinemail", getEmail)
+  
+
+  .get("/api/garden/:gardenId", getGarden)
   //get all the plants
   .get("/api/get-plants", getPlants)
 
@@ -47,7 +49,11 @@ express()
 
   .post("/api/add-plant", addPlant)
 
-  .get("/api/garden/:gardenId", getGarden)
+  .post("/api/signinemail", getEmail)
+
+  .post("/api/add-user", addUser)
+
+  .post("/api/signin", getUser)
 
   .delete("/api/delete-plant/:plantId", deletePlant)
 
@@ -55,9 +61,7 @@ express()
 
   .patch("/api/add-name/:userId", addName)
 
-  .post("/api/add-user", addUser)
-
-  .post("/api/signin", getUser)
+  
 
   .get("*", (request, response) => {
     return response
