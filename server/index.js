@@ -20,15 +20,17 @@ const { addName } = require("./handlers/addName");
 
 
 express()
-  .use(function (_req, res, next) {
-    res.header("Access-Control-Allow-Origin", process.env.ALLOWED_ORIGIN);
-    res.header(
-      "Access-Control-Allow-Headers",
-      "Content-Type, Accept, Authorization",
-    );
-    res.header("Access-Control-Allow-Methods", "GET, POST, PATCH, DELETE");
-    next();
+ .use((req, res, next) => {
+  const allowedOrigins = ['https://plant-care-app.vercel.app', 'http://localhost:5100/'];
+  const origin = req.headers.origin;
+  if (allowedOrigins.includes(origin)) {
+      res.setHeader('Access-Control-Allow-Origin', origin);
+  }
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  res.setHeader('Access-Control-Allow-Methods', '*');
+  next();
   })
+  app.use(morgan("tiny"))
   .use(function (req, res, next) {
     res.header(
       "Access-Control-Allow-Methods",
