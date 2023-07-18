@@ -28,6 +28,7 @@ express()
   }
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
   res.setHeader('Access-Control-Allow-Methods', '*');
+  res.setHeader('Access-Control-Allow-Origin', "no-cors")
   next();
   })
   .use(morgan("tiny"))

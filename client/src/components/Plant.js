@@ -18,6 +18,7 @@ const Plant = ({ plant, garden, setGarden, empty, setEmpty }) => {
     ((plant.waterTime - waterTime) / plant.timer) * 100
   );
   console.log(danger);
+  console.log(plant);
 
   //setting danger based on percent
   useEffect(() => {
@@ -128,31 +129,31 @@ const Plant = ({ plant, garden, setGarden, empty, setEmpty }) => {
       {percent > 80 && (
         <Battery>
           <i className="fa-solid fa-battery-full green"></i>
-          <p>{percentage}%</p>
+          <p>{percent}%</p>
         </Battery>
       )}
       {percent < 80 && percent > 50 && (
         <Battery>
           <i className="fa-solid fa-battery-three-quarters green"></i>
-          <p>{percentage}%</p>
+          <p>{percent}%</p>
         </Battery>
       )}
       {percent < 50 && percent > 25 && (
         <Battery>
           <i className="fa-solid fa-battery-half yellow"></i>
-          <p>{percentage}%</p>
+          <p>{percent}%</p>
         </Battery>
       )}
       {percent < 25 && percent > 5 && (
         <Battery>
           <i className="fa-solid fa-battery-quarter yellow"></i>
-          <p>{percentage}%</p>
+          <p>{percent}%</p>
         </Battery>
       )}
       {percent < 5 && (
         <Battery>
           <i className="fa-solid fa-battery-empty red"></i>
-          <p>{percentage}%</p>
+          <p>{percent}%</p>
         </Battery>
       )}
     </Box>
