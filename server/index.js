@@ -17,7 +17,18 @@ const { waterPlant } = require("./handlers/waterPlant");
 const { addName } = require("./handlers/addName");
 
 
+
+
 express()
+  .use(function (_req, res, next) {
+    res.header("Access-Control-Allow-Origin", process.env.ALLOWED_ORIGIN);
+    res.header(
+      "Access-Control-Allow-Headers",
+      "Content-Type, Accept, Authorization",
+    );
+    res.header("Access-Control-Allow-Methods", "GET, POST, PATCH, DELETE");
+    next();
+  })
   .use(function (req, res, next) {
     res.header(
       "Access-Control-Allow-Methods",
@@ -73,3 +84,5 @@ express()
 
 
   .listen(PORT, () => console.info(`Listening on port ${PORT}`));
+
+  
