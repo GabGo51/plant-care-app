@@ -22,9 +22,9 @@ const Garden = () => {
   console.log(mode);
   
   const navigate = useNavigate();
-  if (user === "" ) {
-    navigate("/");
-  }
+  // if (user === "" ) {
+  //   navigate("/");
+  // }
   
 
   //Fetching the individual garden
