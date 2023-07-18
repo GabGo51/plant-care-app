@@ -30,7 +30,7 @@ express()
   res.setHeader('Access-Control-Allow-Methods', '*');
   next();
   })
-  app.use(morgan("tiny"))
+  .use(morgan("tiny"))
   .use(function (req, res, next) {
     res.header(
       "Access-Control-Allow-Methods",
