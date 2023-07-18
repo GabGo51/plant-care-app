@@ -52,7 +52,7 @@ const Signup = () => {
       event.preventDefault();
     } else {
       event.preventDefault();
-      fetch("/api/add-user", {
+      fetch("https://plant-care-app.vercel.app/api/add-user", {
         method: "POST",
         headers: {
           Accept: "application/json",
