@@ -21,10 +21,10 @@ const Garden = () => {
   const [empty, setEmpty] = useState(false)
   console.log(mode);
   
-  // const navigate = useNavigate();
-  // if (user === " " ) {
-  //   navigate("/");
-  // }
+  const navigate = useNavigate();
+  if (user === "" ) {
+    navigate("/");
+  }
   
 
   //Fetching the individual garden
