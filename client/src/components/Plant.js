@@ -39,7 +39,7 @@ const Plant = ({ plant, garden, setGarden, empty, setEmpty }) => {
 
   //delete function to remove a plant from garden
   const handleDelete = (plantId) => {
-    fetch(`https://plant-care-app.onrender.com/api/delete-plant/${plantId}`, {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/api/delete-plant/${plantId}`, {
       method: "DELETE",
       headers: {
         Accept: "application/json",
@@ -71,7 +71,7 @@ const Plant = ({ plant, garden, setGarden, empty, setEmpty }) => {
 
   //water function to reset the water timer on a specific plant
   const handleWater = (plantId) => {
-    fetch(`https://plant-care-app.onrender.com/api/water-plant/${plantId}`, {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/api/water-plant/${plantId}`, {
       method: "PATCH",
       headers: {
         Accept: "application/json",

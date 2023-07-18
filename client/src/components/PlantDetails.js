@@ -33,7 +33,7 @@ const PlantDetails = () => {
 
   //Adding a plant to your collection
   const handleClick = () => {
-    fetch("https://plant-care-app.onrender.com/api/add-plant", {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/api/add-plant`, {
       method: "POST",
       headers: {
         Accept: "application/json",

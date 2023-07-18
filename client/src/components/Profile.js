@@ -45,7 +45,7 @@ const Profile = () => {
   const handleName = (event, userId) => {
     event.preventDefault();
 
-    fetch(`https://plant-care-app.onrender.com/api/add-name/${userId}`, {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/api/add-name/${userId}`, {
       method: "PATCH",
       headers: {
         Accept: "application/json",
