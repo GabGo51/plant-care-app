@@ -5,7 +5,7 @@ import { useState } from "react";
 //Context to keep track of the user logged in 
 export const UserContext = createContext(null);
 export const UserProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState("");
   const [mode ,setMode] = useState(true)
   console.log(user);
   useEffect(()=>{
