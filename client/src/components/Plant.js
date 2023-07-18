@@ -128,31 +128,31 @@ const Plant = ({ plant, garden, setGarden, empty, setEmpty }) => {
       {percent > 80 && (
         <Battery>
           <i className="fa-solid fa-battery-full green"></i>
-          <p>{percent}%</p>
+          <p>{percentage}%</p>
         </Battery>
       )}
       {percent < 80 && percent > 50 && (
         <Battery>
           <i className="fa-solid fa-battery-three-quarters green"></i>
-          <p>{percent}%</p>
+          <p>{percentage}%</p>
         </Battery>
       )}
       {percent < 50 && percent > 25 && (
         <Battery>
           <i className="fa-solid fa-battery-half yellow"></i>
-          <p>{percent}%</p>
+          <p>{percentage}%</p>
         </Battery>
       )}
       {percent < 25 && percent > 5 && (
         <Battery>
           <i className="fa-solid fa-battery-quarter yellow"></i>
-          <p>{percent}%</p>
+          <p>{percentage}%</p>
         </Battery>
       )}
       {percent < 5 && (
         <Battery>
           <i className="fa-solid fa-battery-empty red"></i>
-          <p>{percent}%</p>
+          <p>{percentage}%</p>
         </Battery>
       )}
     </Box>
