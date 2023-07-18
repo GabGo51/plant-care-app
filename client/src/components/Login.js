@@ -37,7 +37,7 @@ const Login = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    fetch("/api/signin", {
+    fetch("https://plant-care-app.onrender.com/api/signin", {
       method: "POST",
       headers: {
         Accept: "application/json",
