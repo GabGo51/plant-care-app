@@ -13,6 +13,7 @@ const Plant = ({ plant, garden, setGarden, empty, setEmpty }) => {
   const [waterTime, setWaterTime] = useState(Date.now()); //initial date
   const [danger, setDanger] = useState(false);
   const [percent, setPercent] = useState(100);
+  //yo
 
   const percentage = Math.floor(
     ((plant.waterTime - waterTime) / plant.timer) * 100
