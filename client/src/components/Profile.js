@@ -38,6 +38,7 @@ const Profile = () => {
   //signout button clearing state and local save
   const handleClick = () => {
     setUser(null);
+    localStorage.removeItem("mode")
     localStorage.removeItem("email");
     navigate("/");
   };
@@ -114,8 +115,13 @@ const Profile = () => {
 
         
       </Box>
-      <Moon mode={mode} onClick={handleMoon}><i class="fa-solid fa-moon"></i></Moon>
+      
+      <Toggle mode = {mode}>
+      <Circle mode = {mode}></Circle>
+      
       <Sun mode={mode} onClick = {handleSun}> <i class="fa-solid fa-sun"></i></Sun>
+      <Moon mode={mode} onClick={handleMoon}><i class="fa-solid fa-moon"></i></Moon>
+      </Toggle>
       <ActionBar />
     </>
   );
@@ -125,7 +131,7 @@ const Box = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-
+  padding-bottom: 200px;
   h1 {
     font-weight: 500;
     margin-bottom: 30px;
@@ -186,20 +192,20 @@ const Name = styled.form`
 `;
 
 const Moon = styled.button`
-position: fixed;
+
 color: ${({mode}) => mode?"black":"#DBDBDB  "};
-top: 10px;
-right: 10px;
+
+scale: 1.1;
 background-color: transparent;
 border: none;
 cursor: pointer;
 `
 
 const Sun = styled.button`
-position: fixed;
+
 color: ${({mode}) => mode?"black":"#DBDBDB   "};
-top: 10px;
-left: 10px;
+
+scale: 1.1;
 background-color: transparent;
 border: none;
 cursor: pointer;
@@ -221,6 +227,34 @@ position: absolute;
 top: 185px;
 right: 5px;
 transform: rotate(-20deg);
+`
+
+const Toggle = styled.div`
+position: absolute;
+transition: 300ms;
+display: flex;
+align-items: center;
+justify-content: space-between;
+top: 29px;
+right: 10px;
+background-color: transparent;
+width: 70px;
+height: 30px;
+border-radius: 20px;
+border: ${({mode}) => mode?"2px solid black":"2px solid white  "};
+padding: 2px;
+
+`
+const Circle = styled.div`
+position: absolute;
+transition: 300ms;
+width: 30px;
+height: 30px;
+background-color: transparent;
+border: ${({mode}) => mode?"2px solid black":"2px solid white  "};
+border-radius: 50%;
+transform: translateX(-7%);
+transform: ${({mode}) => mode?"translateX(-9%)":"translateX(118%)"};
 `
 
 export default Profile;

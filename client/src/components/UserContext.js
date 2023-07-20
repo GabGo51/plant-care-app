@@ -6,7 +6,18 @@ import { useState } from "react";
 export const UserContext = createContext(null);
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [mode ,setMode] = useState(true)
+  const [mode, setMode] = useState(getInitialMode);
+
+  // Function to get the initial mode from localStorage or return true (default mode)
+  function getInitialMode() {
+    const savedMode = localStorage.getItem("mode");
+    return savedMode === "true";
+  }
+
+  // Function to save the mode state to localStorage
+  useEffect(() => {
+    localStorage.setItem("mode", mode);
+  }, [mode]);
   console.log(user);
   useEffect(()=>{
 
