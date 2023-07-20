@@ -17,11 +17,24 @@ const { waterPlant } = require("./handlers/waterPlant");
 const { addName } = require("./handlers/addName");
 
 
+
+
 express()
+ .use((req, res, next) => {
+  const allowedOrigins = ['https://plant-care-app.vercel.app', 'http://localhost:5100/'];
+  const origin = req.headers.origin;
+  if (allowedOrigins.includes(origin)) {
+      res.setHeader('Access-Control-Allow-Origin', origin);
+  }
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  res.setHeader('Access-Control-Allow-Methods', '*');
+  next();
+  })
+  .use(morgan("tiny"))
   .use(function (req, res, next) {
     res.header(
       "Access-Control-Allow-Methods",
-      "OPTIONS, HEAD, GET, PUT, POST, DELETE"
+      "OPTIONS, HEAD, GET, PUT, POST, DELETE, PATCH"
     );
     res.header(
       "Access-Control-Allow-Headers",
@@ -36,9 +49,12 @@ express()
   .use("/", express.static(__dirname + "/"))
 
   // END POINT.
+  .get('/hello', (_, res) => res.send('Hello from BLOOM')) 
 
 
-  .post("/api/signinemail", getEmail)
+  
+
+  .get("/api/garden/:gardenId", getGarden)
   //get all the plants
   .get("/api/get-plants", getPlants)
 
@@ -47,7 +63,11 @@ express()
 
   .post("/api/add-plant", addPlant)
 
-  .get("/api/garden/:gardenId", getGarden)
+  .post("/api/signinemail", getEmail)
+
+  .post("/api/add-user", addUser)
+
+  .post("/api/signin", getUser)
 
   .delete("/api/delete-plant/:plantId", deletePlant)
 
@@ -55,9 +75,7 @@ express()
 
   .patch("/api/add-name/:userId", addName)
 
-  .post("/api/add-user", addUser)
-
-  .post("/api/signin", getUser)
+  
 
   .get("*", (request, response) => {
     return response
@@ -69,3 +87,5 @@ express()
 
 
   .listen(PORT, () => console.info(`Listening on port ${PORT}`));
+
+  

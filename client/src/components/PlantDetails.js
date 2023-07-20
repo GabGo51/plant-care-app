@@ -18,7 +18,7 @@ const PlantDetails = () => {
   useEffect(() => {
     const fetchPlantData = async () => {
       try {
-        const response = await fetch(`/api/plant/${params.plantId}`);
+        const response = await fetch(`https://plant-care-app.onrender.com/api/plant/${params.plantId}`);
         if (!response.ok) {
           throw new Error("Failed to fetch plant data");
         }
@@ -33,7 +33,7 @@ const PlantDetails = () => {
 
   //Adding a plant to your collection
   const handleClick = () => {
-    fetch("/api/add-plant", {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/api/add-plant`, {
       method: "POST",
       headers: {
         Accept: "application/json",
