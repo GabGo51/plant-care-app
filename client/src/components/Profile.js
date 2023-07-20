@@ -20,7 +20,7 @@ const Profile = () => {
   //fetching garden for length displaying number of plants 
   useEffect(() => {
     user &&
-      fetch(`${process.env.REACT_APP_BACKEND_URL}/api/garden/${user.gardenId}`)
+      fetch(`/api/garden/${user.gardenId}`)
         .then((response) => response.json())
         .then((parse) => {
           console.log(parse.data);
@@ -45,7 +45,7 @@ const Profile = () => {
   const handleName = (event, userId) => {
     event.preventDefault();
 
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/api/add-name/${userId}`, {
+    fetch(`/api/add-name/${userId}`, {
       method: "PATCH",
       headers: {
         Accept: "application/json",
@@ -102,7 +102,7 @@ const Profile = () => {
             <div>
               Number of plants in Garden: <span>{garden}</span>
             </div>
-            <div>Joined BLOOM on: {user.time}</div>
+            <div>Joined Plant on: {user.time}</div>
           </Info>
         )}
         <button onClick={handleClick}>Log out</button>
@@ -114,8 +114,8 @@ const Profile = () => {
 
         
       </Box>
-      <Moon mode={mode} onClick={handleMoon}><i className="fa-solid fa-moon"></i></Moon>
-      <Sun mode={mode} onClick = {handleSun}> <i className="fa-solid fa-sun"></i></Sun>
+      <Moon mode={mode} onClick={handleMoon}><i class="fa-solid fa-moon"></i></Moon>
+      <Sun mode={mode} onClick = {handleSun}> <i class="fa-solid fa-sun"></i></Sun>
       <ActionBar />
     </>
   );

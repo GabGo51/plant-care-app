@@ -13,13 +13,11 @@ const Plant = ({ plant, garden, setGarden, empty, setEmpty }) => {
   const [waterTime, setWaterTime] = useState(Date.now()); //initial date
   const [danger, setDanger] = useState(false);
   const [percent, setPercent] = useState(100);
-  //yo
 
   const percentage = Math.floor(
     ((plant.waterTime - waterTime) / plant.timer) * 100
   );
   console.log(danger);
-  console.log(plant);
 
   //setting danger based on percent
   useEffect(() => {
@@ -40,7 +38,7 @@ const Plant = ({ plant, garden, setGarden, empty, setEmpty }) => {
 
   //delete function to remove a plant from garden
   const handleDelete = (plantId) => {
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/api/delete-plant/${plantId}`, {
+    fetch(`/api/delete-plant/${plantId}`, {
       method: "DELETE",
       headers: {
         Accept: "application/json",
@@ -72,7 +70,7 @@ const Plant = ({ plant, garden, setGarden, empty, setEmpty }) => {
 
   //water function to reset the water timer on a specific plant
   const handleWater = (plantId) => {
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/api/water-plant/${plantId}`, {
+    fetch(`/api/water-plant/${plantId}`, {
       method: "PATCH",
       headers: {
         Accept: "application/json",
@@ -266,7 +264,7 @@ const PlantImg = styled.img`
     object-fit: cover;
     border-radius: 50%;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-    
+    transform: scaleX(-1);
     background-color: ${({mode}) => mode?"white":"#313131  "};
     ${({ danger }) =>
     danger &&

@@ -37,7 +37,7 @@ const Login = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/api/signin`, {
+    fetch("/api/signin", {
       method: "POST",
       headers: {
         Accept: "application/json",

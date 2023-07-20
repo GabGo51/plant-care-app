@@ -13,12 +13,11 @@ const ActionBar = () => {
   if (!user) {
     navigate("/");
   }
-  //fucckkkkkkkk
   return (
     <>
       {user && (
         <Container mode = {mode}>
-          <ButtonPlant mode ={mode} to={`/garden/${user.gardenId}`} activeclassname="active">
+          <ButtonPlant mode ={mode} to={`/garden/${user.gardenId}`} activeClassName="active">
             <p>Garden</p>
             <i className="fa-solid fa-seedling plant"></i>
           </ButtonPlant>

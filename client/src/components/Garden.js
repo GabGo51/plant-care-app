@@ -20,16 +20,16 @@ const Garden = () => {
   const [garden, setGarden] = useState(null);
   const [empty, setEmpty] = useState(false)
   console.log(mode);
-  
+
   const navigate = useNavigate();
-  // if (user === "" ) {
-  //   navigate("/");
-  // }
+  if (!user) {
+    navigate("/");
+  }
   
 
   //Fetching the individual garden
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/api/garden/${params.gardenId}`)
+    fetch(`/api/garden/${params.gardenId}`)
       .then((response) => response.json())
       .then((parse) => {
         setGarden(parse.data);

@@ -5,7 +5,7 @@ import { useState } from "react";
 //Context to keep track of the user logged in 
 export const UserContext = createContext(null);
 export const UserProvider = ({ children }) => {
-  const [user, setUser] = useState("");
+  const [user, setUser] = useState(null);
   const [mode ,setMode] = useState(true)
   console.log(user);
   useEffect(()=>{
@@ -15,7 +15,7 @@ export const UserProvider = ({ children }) => {
    
 
       if(email){
-      fetch(`${process.env.REACT_APP_BACKEND_URL}/api/signinemail`, {
+      fetch("/api/signinemail", {
         method: "POST",
         headers: {
           Accept: "application/json",

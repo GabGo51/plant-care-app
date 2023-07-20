@@ -24,7 +24,7 @@ const Library = () => {
 
   //Fetching all the plants from the db
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/api/get-plants`)
+    fetch(`/api/get-plants`)
       .then((response) => response.json())
       .then((parse) => {
         setAllPlants(parse.plants);

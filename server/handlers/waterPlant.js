@@ -32,7 +32,7 @@ const waterPlant = async (request, response) => {
         timer = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
       }
       if (plant.water === "Average") {
-        timer = 7 * 24 * 60 * 60 * 1000; // 1 week in milliseconds
+        timer = 600000; // 1 week in milliseconds
       }
       if (plant.water === "Minimum") {
         timer = 14 * 24 * 60 * 60 * 1000; // 2 weeks in milliseconds
