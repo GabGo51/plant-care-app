@@ -10,6 +10,7 @@ const ActionBar = () => {
   const { user, mode } = useContext(UserContext);
   const navigate = useNavigate();
 
+  //
   if (!user) {
     navigate("/");
   }
