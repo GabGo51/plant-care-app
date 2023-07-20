@@ -239,7 +239,7 @@ top: 29px;
 right: 10px;
 background-color: transparent;
 width: 70px;
-height: 30px;
+height: 32px;
 border-radius: 20px;
 border: ${({mode}) => mode?"2px solid black":"2px solid white  "};
 padding: 2px;
