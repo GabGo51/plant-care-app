@@ -1,9 +1,9 @@
 
-#BLOOM Plant care app Project
+# BLOOM Plant care app Project
 
 Welcome to BLOOM my first full stack solo project. This was the final project of my bootcamp. The aim was to create a plant care website/app where you could add plant to your collection to keep track of when to water them. User can add, remove , search and water the plants.
 
-##Feature
+## Feature
 
 - **Sign Up**: User can create an account that gets posted in the db
 - **Log In**:User can Log In using the account in created 
