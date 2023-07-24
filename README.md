@@ -17,9 +17,6 @@ Welcome to BLOOM my first full stack solo project. This was the final project of
 -**Responsive Design**: Design is responsive for Phone, Tablet, and Computer screen 
 
 
-
-- **Folder Structure**
-
 The repository has the following folder structure:
 
 ### Client
@@ -81,7 +78,7 @@ The application utilizes JSON data to populate the plants and users information.
 
   "_id": "64ac4a0effb1bb4eae3a43bc"
   "email": "snow.gabo51@gmail.com"
-  "password": "spacekid51"
+  "password": "hello1234"
   "time": "July 10 2023"
   "gardenId": "dfb80147-5ffe-4787-9ba4-ce6e4872ddbe"
   "name": "Gabriel Gosselin"
