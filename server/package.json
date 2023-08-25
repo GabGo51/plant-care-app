@@ -15,7 +15,12 @@
     "request-promise": "^4.2.6",
     "uuid": "^9.0.0"
   },
+  "devDependencies": {
+    "concurrently": "^8.2.1",
+    "nodemon": "^2.0.2"
+  },
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "nodemon index.js",
+    "both-dev": "concurrently \"yarn start\" \"yarn --cwd ../client/ start\""
   }
 }
