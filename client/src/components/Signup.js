@@ -160,7 +160,7 @@ const Box = styled.div`
 
   h1 {
     position: absolute;
-    top: 20px;
+    top: 40px;
     font-weight: 500;
   }
 

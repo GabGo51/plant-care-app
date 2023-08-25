@@ -114,10 +114,10 @@ const Box = styled.div`
   justify-content: center;
   position: relative;
   height: 100vh;
-
+  padding-top: 20px;
   h1 {
     position: absolute;
-    top: 20px;
+    top: 45px;
     font-weight: 500;
   }
 
