@@ -21,7 +21,7 @@ const { addName } = require("./handlers/addName");
 express()
 .use(cors())
 .use(function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "http://localhost:5100"); 
+  res.header("Access-Control-Allow-Origin", "https://bloom-bu5w.onrender.com"); 
   res.header(
     "Access-Control-Allow-Methods",
     "OPTIONS, HEAD, GET, PUT, POST, DELETE"
