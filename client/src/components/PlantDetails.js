@@ -18,7 +18,7 @@ const PlantDetails = () => {
   useEffect(() => {
     const fetchPlantData = async () => {
       try {
-        const response = await fetch(`/api/plant/${params.plantId}`);
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/plant/${params.plantId}`);
         if (!response.ok) {
           throw new Error("Failed to fetch plant data");
         }
