@@ -64,8 +64,10 @@ express()
       .status(404)
       .json({ status: 404, message: "No endpoint found." });
   })
-
   
 
-
   .listen(PORT, () => console.info(`Listening on port ${PORT}`));
+  app.get('/hello', (_, res) => {
+    console.log('Received /hello request');
+    res.send('Hello from ME');
+});
