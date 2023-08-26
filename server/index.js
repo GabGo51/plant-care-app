@@ -19,7 +19,9 @@ const { addName } = require("./handlers/addName");
 
 
 express()
-.use(cors())
+.use(cors({
+  origin: "https://plant-care-app.vercel.app"
+}))
 .use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "https://bloom-bu5w.onrender.com"); 
   res.header(
