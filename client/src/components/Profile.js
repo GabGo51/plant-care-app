@@ -20,7 +20,7 @@ const Profile = () => {
   //fetching garden for length displaying number of plants 
   useEffect(() => {
     user &&
-      fetch(`/api/garden/${user.gardenId}`)
+      fetch(`${process.env.REACT_APP_BACKEND_URL}/api/garden/${user.gardenId}`)
         .then((response) => response.json())
         .then((parse) => {
           console.log(parse.data);
@@ -46,7 +46,7 @@ const Profile = () => {
   const handleName = (event, userId) => {
     event.preventDefault();
 
-    fetch(`/api/add-name/${userId}`, {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/api/add-name/${userId}`, {
       method: "PATCH",
       headers: {
         Accept: "application/json",

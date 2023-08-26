@@ -52,7 +52,7 @@ const Signup = () => {
       event.preventDefault();
     } else {
       event.preventDefault();
-      fetch("/api/add-user", {
+      fetch(`${process.env.REACT_APP_BACKEND_URL}/api/add-user`, {
         method: "POST",
         headers: {
           Accept: "application/json",

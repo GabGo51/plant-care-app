@@ -26,7 +26,7 @@ export const UserProvider = ({ children }) => {
    
 
       if(email){
-      fetch("/api/signinemail", {
+      fetch(`${process.env.REACT_APP_BACKEND_URL}/api/signinemail`, {
         method: "POST",
         headers: {
           Accept: "application/json",
