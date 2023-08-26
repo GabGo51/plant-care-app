@@ -23,7 +23,7 @@ express()
   origin: "https://plant-care-app.vercel.app"
 }))
 .use(function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "https://bloom-bu5w.onrender.com"); 
+  res.header("Access-Control-Allow-Origin", "https://plant-care-app.vercel.app"); 
   res.header(
     "Access-Control-Allow-Methods",
     "OPTIONS, HEAD, GET, PUT, POST, DELETE"
